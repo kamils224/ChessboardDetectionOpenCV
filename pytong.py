@@ -1,95 +1,49 @@
 import copy
-
+import json
 from PIL import Image, ImageTk
 import tkinter as tk
 import argparse
 import cv2
 
 
+class old_play(): #klasa przechowującą zapisaną rozgrywkę
+    def __init__(self,path):
+        self.path = path
+        self.load()
 
-nowyruch = [[0 for x in range(8)] for y in range(8)]
-nowyruch[0][0] = 1
-nowyruch[0][2] = 1
-nowyruch[0][4] = 1
-nowyruch[0][6] = 1
+    def load(self): #wczytywanie z pliku JSON historie rozgrywki, nazwa, historia
+        data = open(self.path, 'r').read()
+        parsed_json = json.loads(data)
+        self.game_name = parsed_json["game_name"]
+        self.json_game_history = parsed_json["game_history"]
 
-nowyruch[1][1] = 1
-nowyruch[1][3] = 1
-nowyruch[1][5] = 1
-nowyruch[1][7] = 1
+    def return_round(self, round_number): # zwraca macierz obrazującą plansze w danej rundzie,
+        if round_number >= len(self.json_game_history):
+            print("W historii nie ma takiej rundy")
+        else:
+            return self.json_game_history[round_number]["pawns"]
 
-nowyruch[3][1] = 1
-nowyruch[2][2] = 1
-nowyruch[2][4] = 1
-nowyruch[2][6] = 1
 
-nowyruch[5][1] = 2
-nowyruch[5][3] = 2
-nowyruch[5][5] = 2
-nowyruch[5][7] = 2
+gra = old_play('trial_game.txt')
 
-nowyruch[6][0] = 2
-nowyruch[6][2] = 2
-nowyruch[6][4] = 2
-nowyruch[6][6] = 2
 
-nowyruch[7][1] = 2
-nowyruch[7][3] = 2
-nowyruch[7][5] = 2
-nowyruch[7][7] = 2
 
-class Checkers_Board():
+class Checkers_Board(): # klasa zajmująca się wizualizacją
 
-    def __init__(self, row, columns, image_board):
-        self.rows = row
-        self.columns = columns
-        self.sprite = image_board
-        self.board = copy.deepcopy(self.sprite)
-        self.Matrix = [[0 for x in range(self.rows)] for y in range(self.columns)]
-        self.start_standard()
+    def __init__(self, image_board, visualisation, start_position):
+        self.sprite = image_board # sprite - tło
+        self.board = copy.deepcopy(self.sprite) # na tym jest rysowana jedna klatka
+        self.Matrix = start_position
+        self.visualisation = visualisation
+        self.draw(start_position)
 
-    def start_standard(self):
-        self.Matrix[0][0] = 1
-        self.Matrix[0][2] = 1
-        self.Matrix[0][4] = 1
-        self.Matrix[0][6] = 1
-
-        self.Matrix[1][1] = 1
-        self.Matrix[1][3] = 1
-        self.Matrix[1][5] = 1
-        self.Matrix[1][7] = 1
-
-        self.Matrix[2][0] = 1
-        self.Matrix[2][2] = 1
-        self.Matrix[2][4] = 1
-        self.Matrix[2][6] = 1
-
-        self.Matrix[5][1] = 2
-        self.Matrix[5][3] = 2
-        self.Matrix[5][5] = 2
-        self.Matrix[5][7] = 2
-
-        self.Matrix[6][0] = 2
-        self.Matrix[6][2] = 2
-        self.Matrix[6][4] = 2
-        self.Matrix[6][6] = 2
-
-        self.Matrix[7][1] = 2
-        self.Matrix[7][3] = 2
-        self.Matrix[7][5] = 2
-        self.Matrix[7][7] = 2
-
-        self.draw(self.Matrix)
-
-    def start_position(self,PositionMatrix):
-        self.Matrix = PositionMatrix
 
     def draw(self,PositionMatrix):
         self.board = copy.deepcopy(self.sprite)
-        for x in range(self.rows):
-            for y in range(self.columns):
+        for x in range(len(self.Matrix)):
+            for y in range(len(self.Matrix[x])):
                 if self.Matrix[y][x]!= PositionMatrix[y][x]:
-                    cv2.rectangle(self.board, (2+(x * 100), 2+(y * 100)), (98+(x * 100), 98+(y * 100)), (0, 255, 0), 4)
+                        cv2.rectangle(self.board, (2+(x * 100), 2+(y * 100)), (98+(x * 100), 98+(y * 100)), (0, 255, 0), 4)
                 if PositionMatrix[y][x] == 0:
                     continue
                 elif PositionMatrix[y][x] == 1:
@@ -103,52 +57,51 @@ class Checkers_Board():
                     cv2.circle(self.board, (50 + (x * 100), 50 + (y * 100)), 40, (0, 0, 100), -1)
                     cv2.circle(self.board, (50 + (x * 100), 50 + (y * 100)), 30, (0, 0, 255), -1)
 
-    def return_board(self):
-        image9 = self.board
-        b, g, r = cv2.split(image9)
-        img98 = cv2.merge((r, g, b))
-        im98 = Image.fromarray(img98)
-        imgtk98 = ImageTk.PhotoImage(image=im98)
-        return imgtk98
+        b, g, r = cv2.split(self.board)
+        image = cv2.merge((r, g, b))
+        image2 = Image.fromarray(image)
+        tura8 = ImageTk.PhotoImage(image=image2)
+        self.visualisation.configure(image=tura8)
+        self.visualisation.image = tura8
+        self.visualisation.grid(row= 0, column=1)
+        self.Matrix = PositionMatrix
 
-    def __del__(self):
-        print ('deleting Chceckers_board:  ', id(self))
 
 class Application:
     def __init__(self, output_path = "./"):
-        """ Initialize application which uses OpenCV + Tkinter. It displays
-            a video stream in a Tkinter window and stores current snapshot on disk """
-        self.vs = cv2.VideoCapture(0) # capture video frames, 0 is your default video camera
-        self.output_path = output_path  # store output path
-        self.current_image = None  # current image from the camera
+        self.vs = cv2.VideoCapture(0) # klatki z kamerki, 0 to domyślna
+        self.output_path = output_path  # sciezka wyjsciowa
+        self.current_image = None  # aktualny obraz z kamery
+        self.actual_round = 0;
 
-        self.root = tk.Tk()  # initialize root window
-        self.root.title("PyImageSearch PhotoBooth")  # set window title
+        self.root = tk.Tk()  # inicjalizacja rooota
+        self.root.title("Checkers")  # tytul okna
         # self.destructor function gets fired when the window is closed
-        self.root.protocol('WM_DELETE_WINDOW', self.destructor)
+        self.root.protocol('WM_DELETE_WINDOW', self.destructor) # destrucor odpala się po zamknięciu okna
 
-        self.panel = tk.Label(self.root)  # initialize image panel
-        self.panel.pack(side="left", padx=10, pady=10)
-
-        image9 = cv2.imread('szachownica.png')
-
-        self.board_game = Checkers_Board(8, 8, image9)
-
-        next_image = self.board_game.return_board()
-        self.panelB = tk.Label(self.root, image=next_image)
-        self.panelB.image = next_image
-        self.panelB.pack(side="right", padx=0, pady=0)
+        self.panel = tk.Label(self.root)  # inicjalizacja panelu z kamera
+        self.panel.grid(row=0, column=0)
 
 
-        # create a button, that when pressed, will take the current frame and save it to file
-        btn = tk.Button(self.root, text="move forward", command=self.move_forward)
-        btn.pack(side="bottom", fill="both", expand=True, padx=10, pady=10)
+        self.Checkers_panel = tk.Label(self.root)
+        self.Checkers_panel.grid(row= 0, column=1)
+        szachownica = cv2.imread('szachownica.png')  # wczytanie szablonu , tła do warcab
+        self.board_game = Checkers_Board(szachownica, self.Checkers_panel, gra.return_round(0)) #tworzenie nowej gry z histori
 
-        btn = tk.Button(self.root, text="move backward", command=self.move_backward)
-        btn.pack(side="bottom", fill="both", expand=True, padx=10, pady=10)
+        f1 = tk.Frame(self.root)
+        f1.grid(row=1, column=1, sticky="nsew")
 
-        # start a self.video_loop that constantly pools the video sensor
-        # for the most recently read frame
+        btn = tk.Button(f1, text="move backward", command=self.move_backward) # przycisk do poprzedniej tury
+        btn.config(height=5)
+        btn.pack(side="left", fill="both", expand=1, padx=20, pady=20)
+        btn = tk.Button(f1, text="move forward", command=self.move_forward)  # przycisk do kolejnej tury
+        btn.pack(side="left", fill="both", expand=1, padx=20, pady=20)
+
+
+
+
+
+
         self.video_loop()
 
     def video_loop(self):
@@ -163,30 +116,20 @@ class Application:
         self.root.after(30, self.video_loop)  # call the same function after 30 milliseconds
 
     def move_forward(self):
-        self.board_game.draw(nowyruch)
-        wynik = self.board_game.return_board()
-        self.panelB.configure(image=wynik)
-        self.panelB.image = wynik
-
-        print("[INFO] next move {}")
+        self.actual_round +=1
+        self.board_game.draw(gra.return_round(self.actual_round))
 
     def move_backward(self):
-        print("[INFO] next move {}")
+        if self.actual_round > 0 :
+            self.actual_round -=1
+            self.board_game.draw(gra.return_round(self.actual_round))
+        else:
+            print("Tura 0 ")
 
     def destructor(self):
-        """ Destroy the root object and release all resources """
-        print("[INFO] closing...")
         self.root.destroy()
-        self.vs.release()  # release web camera
-        cv2.destroyAllWindows()  # it is not mandatory in this application
+        self.vs.release()
 
-# construct the argument parse and parse the arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-o", "--output", default="./",
-    help="path to output directory to store snapshots (default: current folder")
-args = vars(ap.parse_args())
 
-# start the app
-print("[INFO] starting...")
-pba = Application(args["output"])
+pba = Application()
 pba.root.mainloop()
