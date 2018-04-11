@@ -1,8 +1,8 @@
 {
   "game_name":"Trial",
   "date":"Jun 1 2018",
-  "player1name":"andrzej",
-  "player2name":"janek",
+  "player1_name":"Andrei",
+  "player2_name":"Alex",
   "game_history":[
     {
       "round": "0",
