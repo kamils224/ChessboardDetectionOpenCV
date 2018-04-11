@@ -2,14 +2,13 @@ from PIL import Image, ImageTk
 import tkinter as tk
 import cv2
 
-from loading_game_class import loading_game
-from checkers_board_class import Checkers_Board
+
+from my_class.loading_game_class import loading_game
+from my_class.checkers_board_class import Checkers_Board
 
 
 
-gra = loading_game("trial_game.txt") #wczytaj gre pokazowa
-
-
+gra = loading_game("games/trial_game.txt") #wczytaj gre pokazowa
 
 
 class Application:
@@ -47,25 +46,25 @@ class Application:
         btn = tk.Button(f1, text="move forward", command=self.move_forward)  # przycisk do kolejnej tury
         btn.pack(side="left", fill="both", expand=1, padx=20, pady=20)
 
-        f2 = tk.Frame(self.root)
-        f2.grid(row=1, column=0, sticky="nsew")
 
         Frame_Slider = tk.Frame(self.root)
-        f1.grid(row=0, column=2)
+        Frame_Slider.grid(row=0, column=2)
 
         scrollbar = tk.Scrollbar(Frame_Slider)
-        scrollbar.pack(side="right", fill="y")
+        scrollbar.pack(side="right", fill="both", expand=1 )
 
         mylist = tk.Listbox(Frame_Slider, yscrollcommand=scrollbar.set)
         for round_number in gra.game_history:
-            mylist.insert(tk.END, str(round_number) + "This is round number ")
+            mylist.insert(tk.END, str(round_number))
 
-        mylist.pack(side="left", fill="both")
+        mylist.pack(side="left", expand=1, fill="both")
+
+
         scrollbar.config(command=mylist.yview)
 
         self.video_loop()
 
-    def Slider_function(self,val):
+    def Slider_function(self, val):
         print(val)
 
 
