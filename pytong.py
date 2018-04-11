@@ -1,28 +1,13 @@
 import copy
-import json
 from PIL import Image, ImageTk
 import tkinter as tk
 import cv2
 
+from loading_game_class import loading_game
 
-class old_play(): #klasa przechowującą zapisaną rozgrywkę
-    def __init__(self,path):
-        self.path = path
-        self.load()
 
-    def load(self): #wczytywanie z pliku JSON historie rozgrywki, nazwa, historia
-        data = open(self.path, 'r').read()
-        parsed_json = json.loads(data)
-        self.game_name = parsed_json["game_name"]
-        self.json_game_history = parsed_json["game_history"]
 
-    def return_round(self, round_number): # zwraca macierz obrazującą plansze w danej rundzie,
-        if round_number >= len(self.json_game_history):
-            print("W historii nie ma takiej rundy")
-        else:
-            return self.json_game_history[round_number]["pawns"]
-
-gra = old_play('trial_game.txt')
+gra = loading_game('trial_game.txt')
 
 
 
@@ -113,7 +98,7 @@ class Application:
         scrollbar.pack(side="right", fill="y")
 
         mylist = tk.Listbox(Frame_Slider, yscrollcommand=scrollbar.set)
-        for round_number in gra.json_game_history:
+        for round_number in gra.game_history:
             mylist.insert(tk.END, str(round_number) + "This is round number ")
 
         mylist.pack(side="left", fill="both")
@@ -148,7 +133,7 @@ class Application:
         self.root.after(30, self.video_loop)  # call the same function after 30 milliseconds
 
     def move_forward(self):
-        if self.actual_round < len(gra.json_game_history) - 1:
+        if self.actual_round < len(gra.game_history) - 1:
             self.actual_round +=1
             self.board_game.draw(gra.return_round(self.actual_round))
         else:
