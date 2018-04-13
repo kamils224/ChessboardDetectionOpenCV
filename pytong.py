@@ -5,11 +5,9 @@ import cv2
 
 from my_class.loading_game_class import loading_game
 from my_class.checkers_board_class import Checkers_Board
-
-
+from my_class.detect import *
 
 gra = loading_game("games/trial_game.txt") #wczytaj gre pokazowa
-
 
 class Application:
     def __init__(self, output_path = "./"):
@@ -35,7 +33,19 @@ class Application:
         self.Checkers_panel = tk.Label(self.root)
         self.Checkers_panel.grid(row= 0, column=1)
         szachownica = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
-        self.board_game = Checkers_Board(szachownica, self.Checkers_panel, gra.return_round(0)) #tworzenie nowej gry z histori
+        #self.board_game = Checkers_Board(szachownica, self.Checkers_panel, gra.return_round(0)) #tworzenie nowej gry z histori
+
+
+        lista =DetectBoard()
+        Matrix888 = [[0 for x in range(8)] for y in range(8)]
+
+        i =0
+        for x in range(0, 8):
+            for y in range(0, 8):
+                Matrix888[x][y]= lista[i]
+                i+=1
+
+        self.board_game = Checkers_Board(szachownica, self.Checkers_panel,Matrix888)
 
         f1 = tk.Frame(self.root)
         f1.grid(row=1, column=1, sticky="nsew")
@@ -51,16 +61,18 @@ class Application:
         Frame_Slider.grid(row=0, column=2)
 
         scrollbar = tk.Scrollbar(Frame_Slider)
-        scrollbar.pack(side="right", fill="both", expand=1 )
+        scrollbar.pack(side="right", fill="both", expand=1)
 
         mylist = tk.Listbox(Frame_Slider, yscrollcommand=scrollbar.set)
         for round_number in gra.game_history:
             mylist.insert(tk.END, str(round_number))
 
-        mylist.pack(side="left", expand=1, fill="both")
+        mylist.pack(side="right", fill="both", expand=1)
 
 
         scrollbar.config(command=mylist.yview)
+
+
 
         self.video_loop()
 
