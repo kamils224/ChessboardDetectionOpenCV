@@ -1,6 +1,8 @@
 from PIL import Image, ImageTk
 import tkinter as tk
+import tkinter.font as tkfont
 import cv2
+
 
 
 from my_class.loading_game_class import loading_game
@@ -9,7 +11,7 @@ from my_class.detect import *
 
 gra = loading_game("games/trial_game.txt") #wczytaj gre pokazowa
 
-class Application:
+class CaptureCheckersWindow:
     def __init__(self, output_path = "./"):
         self.vs = cv2.VideoCapture(1) # klatki z kamerki, 0 to domyślna
         self.output_path = output_path  # sciezka wyjsciowa
@@ -61,14 +63,16 @@ class Application:
         Frame_Slider.grid(row=0, column=2)
 
         scrollbar = tk.Scrollbar(Frame_Slider)
-        scrollbar.pack(side="right", fill="both", expand=1)
+        #scrollbar.pack(side="right", fill="both", expand=1)
+        scrollbar.grid(column = 1)
 
-        mylist = tk.Listbox(Frame_Slider, yscrollcommand=scrollbar.set)
+
+        mylist = tk.Listbox(Frame_Slider, width=2000, height=0, yscrollcommand=scrollbar.set)
         for round_number in gra.game_history:
             mylist.insert(tk.END, str(round_number))
 
-        mylist.pack(side="right", fill="both", expand=1)
-
+        #mylist.pack(side="right", fill="both", expand=1)
+        mylist.grid(column= 0)
 
         scrollbar.config(command=mylist.yview)
 
@@ -121,5 +125,92 @@ class Application:
         self.vs.release()
 
 
-pba = Application()
-pba.root.mainloop()
+class Application:
+    def __init__(self):
+
+        self.create_window()
+        self.load_background()
+        self.create_buttons()
+        self.create_menu()
+
+    def create_window(self):
+        self.root = tk.Tk()  # inicjalizacja rooota
+        self.root.title("Checkers")  # tytul okna
+
+    def load_background(self):
+        self.background = tk.Label(self.root, compound=tk.CENTER)
+        photo = cv2.imread('Image/background_main.gif')
+
+        b, g, r = cv2.split(photo)
+        image = cv2.merge((r, g, b))
+        image2 = Image.fromarray(image)
+        tura8 = ImageTk.PhotoImage(image=image2)
+        self.background.configure(image=tura8)
+        self.background.image = tura8
+        self.background.grid(row=0, column=0)
+
+    def create_buttons(self):
+        helv36 = tkfont.Font(family='Helvetica', size=15, weight='bold')
+
+        self.button1 = tk.Button(self.background, text="Przechwytywanie z Kamery", command=self.RunCaptureCheckers,
+                                 font=helv36)
+        self.button1.grid(row=0, column=0, padx=(250, 250), pady=(230, 0))
+
+        self.button2 = tk.Button(self.background, text="Wczytaj z Historii", command=self.RunHistoryCheckers,
+                                 font=helv36)
+        self.button2.grid(row=1, column=0, padx=(250, 250), pady=(50, 230))
+
+    def create_menu(self):
+        menubar = tk.Menu(self.root)
+        filemenu = tk.Menu(menubar, tearoff=0)
+        filemenu.add_command(label="New", command=self.donothing)
+        filemenu.add_command(label="Open", command=self.donothing)
+        filemenu.add_command(label="Save", command=self.donothing)
+        filemenu.add_command(label="Save as...", command=self.donothing)
+        filemenu.add_command(label="Close", command=self.donothing)
+
+        filemenu.add_separator()
+
+        filemenu.add_command(label="Exit", command=self.root.quit)
+        menubar.add_cascade(label="File", menu=filemenu)
+        editmenu = tk.Menu(menubar, tearoff=0)
+        editmenu.add_command(label="Undo", command=self.donothing)
+
+        editmenu.add_separator()
+
+        editmenu.add_command(label="Cut", command=self.donothing)
+        editmenu.add_command(label="Copy", command=self.donothing)
+        editmenu.add_command(label="Paste", command=self.donothing)
+        editmenu.add_command(label="Delete", command=self.donothing)
+        editmenu.add_command(label="Select All", command=self.donothing)
+
+        menubar.add_cascade(label="Edit", menu=editmenu)
+        helpmenu = tk.Menu(menubar, tearoff=0)
+        helpmenu.add_command(label="Help Index", command=self.donothing)
+        helpmenu.add_command(label="About...", command=self.donothing)
+
+
+        menubar.add_cascade(label="Help", menu=helpmenu)
+
+        self.root.config(menu=menubar)
+
+    def donothing(self):
+        filewin = tk.Toplevel(self.root)
+        button = tk.Button(filewin, text="Do nothing button")
+        button.pack()
+
+    def RunCaptureCheckers(self):
+        filewin = tk.Toplevel(self.root)
+        filewin.title("Capture Checkers")
+        print("RunCaptureCheckers")
+
+    def RunHistoryCheckers(self):
+        print("RunHistoryCheckers")
+
+
+
+#pba = CaptureCheckersWindow()
+#pba.root.mainloop()
+
+okno = Application()
+okno.root.mainloop()
