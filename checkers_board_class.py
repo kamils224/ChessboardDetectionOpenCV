@@ -12,7 +12,6 @@ class Checkers_Board(): # klasa zajmująca się wizualizacją
         self.visualisation = visualisation
         self.draw(start_position)
 
-
     def draw(self,PositionMatrix):
         self.board = copy.deepcopy(self.sprite)
         for x in range(len(self.Matrix)):
@@ -43,3 +42,5 @@ class Checkers_Board(): # klasa zajmująca się wizualizacją
         self.visualisation.image = tura8
         self.visualisation.grid(row= 0, column=1)
         self.Matrix = PositionMatrix
+
+

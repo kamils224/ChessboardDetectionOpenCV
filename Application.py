@@ -3,11 +3,11 @@ import tkinter as tk
 import tkinter.font as tkfont
 import cv2
 
-from my_class.CaptureCheckersWindow import CaptureCheckersWindow
+from CaptureCheckersWindow import CaptureCheckersWindow
+from HistoryCheckersWindow import HistoryCheckersWindow
 
 class Application:
     def __init__(self):
-
         self.create_window()
         self.load_background()
         self.create_buttons()
@@ -19,7 +19,7 @@ class Application:
 
     def load_background(self):
         self.background = tk.Label(self.root, compound=tk.CENTER)
-        photo = cv2.imread('Image/background_main.gif')
+        photo = cv2.imread('Image/background_main.png')
 
         b, g, r = cv2.split(photo)
         image = cv2.merge((r, g, b))
@@ -78,9 +78,6 @@ class Application:
 
     def RunCaptureCheckers(self):
         Capture = CaptureCheckersWindow()
-        Capture.root.mainloop()
-
-        print("RunCaptureCheckers")
 
     def RunHistoryCheckers(self):
-        print("RunHistoryCheckers")
+        History = HistoryCheckersWindow()

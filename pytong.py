@@ -1,4 +1,4 @@
-from my_class.Application import Application
+from Application import Application
 
 App = Application()
 App.root.mainloop()
