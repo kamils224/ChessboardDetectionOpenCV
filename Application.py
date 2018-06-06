@@ -3,7 +3,6 @@ import tkinter as tk
 import tkinter.font as tkfont
 import cv2
 
-from CaptureCheckersWindow import CaptureCheckersWindow
 from HistoryCheckersWindow import HistoryCheckersWindow
 from Options import OptionsClass
 
@@ -12,7 +11,6 @@ class Application:
         self.create_window()
         self.load_background()
         self.create_buttons()
-        self.create_menu()
 
     def create_window(self):
         self.root = tk.Tk()  # inicjalizacja rooota
@@ -37,56 +35,10 @@ class Application:
                                  font=helv36).grid(row=0, column=0, padx=(250, 250), pady=(230, 0))
 
         self.button2 = tk.Button(self.background, text="Wczytaj z Historii", command=self.RunHistoryCheckers,
-                                 font=helv36).grid(row=1, column=0, padx=(250, 250), pady=(25, 25))
-
-        self.button3 = tk.Button(self.background, text="Ustawienia", command=self.RunOptions,
-                                 font=helv36).grid(row=2, column=0, padx=(250, 250), pady=(0, 100))
-
-
-    def create_menu(self):
-        menubar = tk.Menu(self.root)
-        filemenu = tk.Menu(menubar, tearoff=0)
-        filemenu.add_command(label="New", command=self.donothing)
-        filemenu.add_command(label="Open", command=self.donothing)
-        filemenu.add_command(label="Save", command=self.donothing)
-        filemenu.add_command(label="Save as...", command=self.donothing)
-        filemenu.add_command(label="Close", command=self.donothing)
-
-
-        filemenu.add_separator()
-
-        filemenu.add_command(label="Exit", command=self.root.quit)
-        menubar.add_cascade(label="File", menu=filemenu)
-        editmenu = tk.Menu(menubar, tearoff=0)
-        editmenu.add_command(label="Undo", command=self.donothing)
-
-        editmenu.add_separator()
-
-        editmenu.add_command(label="Cut", command=self.donothing)
-        editmenu.add_command(label="Copy", command=self.donothing)
-        editmenu.add_command(label="Paste", command=self.donothing)
-        editmenu.add_command(label="Delete", command=self.donothing)
-        editmenu.add_command(label="Select All", command=self.donothing)
-
-        menubar.add_cascade(label="Edit", menu=editmenu)
-        helpmenu = tk.Menu(menubar, tearoff=0)
-        helpmenu.add_command(label="Help Index", command=self.donothing)
-        helpmenu.add_command(label="About...", command=self.donothing)
-
-        menubar.add_cascade(label="Help", menu=helpmenu)
-
-        self.root.config(menu=menubar)
-
-    def donothing(self):
-        filewin = tk.Toplevel(self.root)
-        button = tk.Button(filewin, text="Do nothing button")
-        button.pack()
-
-    def RunOptions(self):
-        Options = OptionsClass()
+                                 font=helv36).grid(row=1, column=0, padx=(250, 250), pady=(35, 160))
 
     def RunCaptureCheckers(self):
-        Capture = CaptureCheckersWindow()
+        Capture = OptionsClass()
 
     def RunHistoryCheckers(self):
         History = HistoryCheckersWindow()

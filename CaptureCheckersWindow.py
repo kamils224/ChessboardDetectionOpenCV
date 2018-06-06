@@ -6,8 +6,8 @@ from detect import *
 
 
 class CaptureCheckersWindow:
-    def __init__(self, output_path = "./"):
-        self.vs = cv2.VideoCapture(0) # klatki z kamerki, 0 to domyślna
+    def __init__(self, ip=0, output_path="./",):
+        self.vs = cv2.VideoCapture(ip) # klatki z kamerki, 0 to domyślna
         self.output_path = output_path  # sciezka wyjsciowa
         self.current_image = None  # aktualny obraz z kamery
         self.actual_round = 0;
