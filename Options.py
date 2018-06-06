@@ -5,7 +5,7 @@ from checkers_board_class import Checkers_Board
 from detect import *
 
 
-class CaptureCheckersWindow:
+class OptionsClass:
     def __init__(self, output_path = "./"):
         self.vs = cv2.VideoCapture(0) # klatki z kamerki, 0 to domyślna
         self.output_path = output_path  # sciezka wyjsciowa
@@ -22,24 +22,31 @@ class CaptureCheckersWindow:
         self.panel = tk.Label(frameleft)  # inicjalizacja panelu z kamera
         self.panel.pack(side="top", fill="both", expand=1)
 
-        self.panel2 = tk.Label(frameleft)
-        self.panel2.pack(side="bottom", fill="both", expand=1)
+        self.Options_panel = tk.Label(self.root)
+        self.Options_panel.grid(row=0, column=1)
 
-        self.Checkers_panel = tk.Label(self.root)
-        self.Checkers_panel.grid(row=0, column=1)
 
-        szachownica = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
+        Frame_Slider = tk.Frame(self.Options_panel)
+        Frame_Slider.grid(row=0, column=2)
+        w = tk.Scale(Frame_Slider, from_= 0, to=255, orient='horizontal')    #tutaj przykład masz !!! -------
+        w.pack()
+        w = tk.Scale(Frame_Slider, from_= 0, to=255, orient='horizontal')
+        w.pack()
+        w = tk.Scale(Frame_Slider, from_=0, to=255, orient='horizontal')
+        w.pack()
+        w = tk.Scale(Frame_Slider, from_=0, to=255, orient='horizontal')
+        w.pack()
+        w = tk.Scale(Frame_Slider, from_=0, to=255, orient='horizontal')
+        w.pack()
+        w = tk.Scale(Frame_Slider, from_=0, to=255, orient='horizontal')
+        w.pack()
+        w = tk.Scale(Frame_Slider, from_=0, to=255, orient='horizontal')
+        w.pack()
+        w = tk.Scale(Frame_Slider, from_=0, to=255, orient='horizontal')
+        w.pack()
 
-        lista = DetectBoard()
-        Matrix888 = [[0 for x in range(8)] for y in range(8)]
 
-        i =0
-        for x in range(0, 8):
-            for y in range(0, 8):
-                Matrix888[x][y]= lista[i]
-                i+=1
 
-        self.board_game = Checkers_Board(szachownica, self.Checkers_panel, Matrix888)
 
         self.video_loop()
 

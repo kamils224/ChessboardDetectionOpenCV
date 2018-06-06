@@ -5,6 +5,7 @@ import cv2
 
 from CaptureCheckersWindow import CaptureCheckersWindow
 from HistoryCheckersWindow import HistoryCheckersWindow
+from Options import OptionsClass
 
 class Application:
     def __init__(self):
@@ -36,7 +37,11 @@ class Application:
                                  font=helv36).grid(row=0, column=0, padx=(250, 250), pady=(230, 0))
 
         self.button2 = tk.Button(self.background, text="Wczytaj z Historii", command=self.RunHistoryCheckers,
-                                 font=helv36).grid(row=1, column=0, padx=(250, 250), pady=(50, 230))
+                                 font=helv36).grid(row=1, column=0, padx=(250, 250), pady=(25, 25))
+
+        self.button3 = tk.Button(self.background, text="Ustawienia", command=self.RunOptions,
+                                 font=helv36).grid(row=2, column=0, padx=(250, 250), pady=(0, 100))
+
 
     def create_menu(self):
         menubar = tk.Menu(self.root)
@@ -46,6 +51,7 @@ class Application:
         filemenu.add_command(label="Save", command=self.donothing)
         filemenu.add_command(label="Save as...", command=self.donothing)
         filemenu.add_command(label="Close", command=self.donothing)
+
 
         filemenu.add_separator()
 
@@ -75,6 +81,9 @@ class Application:
         filewin = tk.Toplevel(self.root)
         button = tk.Button(filewin, text="Do nothing button")
         button.pack()
+
+    def RunOptions(self):
+        Options = OptionsClass()
 
     def RunCaptureCheckers(self):
         Capture = CaptureCheckersWindow()
