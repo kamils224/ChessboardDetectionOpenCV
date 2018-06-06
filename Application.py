@@ -11,6 +11,7 @@ class Application:
         self.create_window()
         self.load_background()
         self.create_buttons()
+        self.root.protocol('WM_DELETE_WINDOW', self.destructor)
 
     def create_window(self):
         self.root = tk.Tk()  # inicjalizacja rooota
@@ -31,14 +32,18 @@ class Application:
     def create_buttons(self):
         helv36 = tkfont.Font(family='Helvetica', size=15, weight='bold')
 
-        self.button1 = tk.Button(self.background, text="Przechwytywanie z Kamery", command=self.RunCaptureCheckers,
+        self.button1 = tk.Button(self.background, text="Rozpocznij nową rozgrywkę", command=self.RunCaptureCheckers,
                                  font=helv36).grid(row=0, column=0, padx=(250, 250), pady=(230, 0))
 
         self.button2 = tk.Button(self.background, text="Wczytaj z Historii", command=self.RunHistoryCheckers,
                                  font=helv36).grid(row=1, column=0, padx=(250, 250), pady=(35, 160))
 
     def RunCaptureCheckers(self):
-        Capture = OptionsClass()
+        OptionsClass()
+
 
     def RunHistoryCheckers(self):
-        History = HistoryCheckersWindow()
+        HistoryCheckersWindow()
+
+    def destructor(self):
+        self.root.destroy()

@@ -1,38 +1,27 @@
 import tkinter as tk
 
-from loading_game_class import loading_game
+from LoadedGameManager import LoadedGameManager
 from checkers_board_class import Checkers_Board
 from detect import *
 
-gra = loading_game("SavedGames/trial_game.txt") #wczytaj gre pokazowa
+gra = LoadedGameManager("SavedGames/trial_game.txt") #wczytaj gre pokazowa
 
 
 class HistoryCheckersWindow:
-    def __init__(self, output_path="./"):
-        self.vs = cv2.VideoCapture(1)  # klatki z kamerki, 0 to domyślna
-        self.output_path = output_path  # sciezka wyjsciowa
-        self.current_image = None  # aktualny obraz z kamery
+    def __init__(self):
         self.actual_round = 0;
 
-        self.root = tk.Toplevel()  # inicjalizacja rooota
-        self.root.title("Checkers")  # tytul okna
-        self.root.protocol('WM_DELETE_WINDOW', self.destructor)  # destrucor odpala się po zamknięciu okna
+        self.HistoryWindow = tk.Toplevel()  # inicjalizacja rooota
+        self.HistoryWindow.title("Checkers History")  # tytul okna
+        self.HistoryWindow.protocol('WM_DELETE_WINDOW', self.destructor)  # destrucor odpala się po zamknięciu okna
 
-        frameleft = tk.Frame(self.root)
-        frameleft.grid(row=0, column=0)
+        self.Checkerspanel = tk.Label(self.HistoryWindow).grid(row=0, column=0)
 
-        self.panel = tk.Label(frameleft)  # inicjalizacja panelu z kamera
-        self.panel.pack(side="top", fill="both", expand=1)
 
-        self.panel2 = tk.Label(frameleft)
-        self.panel2.pack(side="bottom", fill="both", expand=1)
 
-        self.Checkers_panel = tk.Label(self.root)
-        self.Checkers_panel.grid(row=0, column=1)
-        szachownica = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
-        self.board_game = Checkers_Board(szachownica, self.Checkers_panel, gra.return_round(0)) #tworzenie nowej gry z histori
 
-        f1 = tk.Frame(self.root)
+
+        f1 = tk.Frame(self.HistoryWindow)
         f1.grid(row=1, column=1, sticky="nsew")
 
         btn = tk.Button(f1, text="move backward", command=self.move_backward)  # przycisk do poprzedniej tury
@@ -41,7 +30,7 @@ class HistoryCheckersWindow:
         btn = tk.Button(f1, text="move forward", command=self.move_forward)  # przycisk do kolejnej tury
         btn.pack(side="left", fill="both", expand=1, padx=20, pady=20)
 
-        Frame_Slider = tk.Frame(self.root)
+        Frame_Slider = tk.Frame(self.HistoryWindow)
         Frame_Slider.grid(row=0, column=2)
 
         scrollbar = tk.Scrollbar(Frame_Slider)
@@ -57,6 +46,9 @@ class HistoryCheckersWindow:
 
         scrollbar.config(command=mylist.yview)
 
+    def LoadCheckersBackGround(self):
+        szachownica = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
+        self.board_game = Checkers_Board(szachownica, self.Checkerspanel,gra.return_round(0))  # tworzenie nowej gry z histori
 
     def move_forward(self):
         if self.actual_round < len(gra.game_history) - 1:
@@ -73,5 +65,4 @@ class HistoryCheckersWindow:
             print("Tura 0 ")
 
     def destructor(self):
-        self.root.destroy()
-        self.vs.release()
+        self.HistoryWindow.destroy()

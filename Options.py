@@ -32,27 +32,27 @@ class OptionsClass:
         self.InitializeSliders()
 
     def InitializeSliders(self):
-        Frame_Slider = tk.Frame(self.RightPanel)
-        Frame_Slider.grid(row=1, column=2)
+        frame_Slider = tk.Frame(self.RightPanel)
+        frame_Slider.grid(row=1, column=2)
 
         tk.Label(self.RightPanel,text = 'Gracz 1' ).grid(row=1, column=1)
-        tk.Label(Frame_Slider, text='MIN').grid(row=0, column=0)
-        tk.Label(Frame_Slider, text='MAX').grid(row=0, column=2)
+        tk.Label(frame_Slider, text='MIN').grid(row=0, column=0)
+        tk.Label(frame_Slider, text='MAX').grid(row=0, column=2)
 
-        tk.Scale(Frame_Slider, from_=0, to=180, orient='horizontal').grid(row=0, column=1)
-        tk.Scale(Frame_Slider, from_=0, to=180, orient='horizontal').grid(row=0, column=3)
+        tk.Scale(frame_Slider, from_=0, to=180, orient='horizontal').grid(row=0, column=1)
+        tk.Scale(frame_Slider, from_=0, to=180, orient='horizontal').grid(row=0, column=3)
 
 
 
-        Frame_Slider2 = tk.Frame(self.RightPanel)
-        Frame_Slider2.grid(row=2, column=2)
+        frame_Slider2 = tk.Frame(self.RightPanel)
+        frame_Slider2.grid(row=2, column=2)
 
         tk.Label(self.RightPanel,text = 'Gracz 2' ).grid(row=2, column=1)
-        tk.Label(Frame_Slider2, text='MIN').grid(row=0, column=0)
-        tk.Label(Frame_Slider2, text='MAX').grid(row=0, column=2)
+        tk.Label(frame_Slider2, text='MIN').grid(row=0, column=0)
+        tk.Label(frame_Slider2, text='MAX').grid(row=0, column=2)
 
-        tk.Scale(Frame_Slider2, from_=0, to=180, orient='horizontal').grid(row=0, column=1)
-        tk.Scale(Frame_Slider2, from_=0, to=180, orient='horizontal').grid(row=0, column=3)
+        tk.Scale(frame_Slider2, from_=0, to=180, orient='horizontal').grid(row=0, column=1)
+        tk.Scale(frame_Slider2, from_=0, to=180, orient='horizontal').grid(row=0, column=3)
 
     def InitializeIpButton(self):
         button1 = tk.Button(self.RightPanel, text='USTAW IP', command=self.InitializeCamera)
@@ -74,8 +74,8 @@ class OptionsClass:
         self.Camerapanel.grid(row=0, column=0)  # pozycjonowanie panelu
 
     def GoToCaptureCheckers(self):
-        Capture = CaptureCheckersWindow(ip=self.CameraIPTextBox.get())
         self.destructor()
+        CaptureCheckersWindow(ip=self.CameraIPTextBox.get())
 
     def InitializeCamera(self):
         self.vs = cv2.VideoCapture(self.CameraIPTextBox.get()) # klatki z kamerki, 0 to domyślna

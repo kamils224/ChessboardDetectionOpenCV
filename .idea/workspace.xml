@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="c843d1ae-7827-498a-b7bd-1878a13cb634" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Application.py" beforeDir="false" afterPath="$PROJECT_DIR$/Application.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/HistoryCheckersWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/HistoryCheckersWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Options.py" beforeDir="false" afterPath="$PROJECT_DIR$/Options.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/loading_game_class.py" beforeDir="false" afterPath="$PROJECT_DIR$/LoadedGameManager.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,28 +20,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="text" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Prezentacje/text">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file leaf-file-name="loading_game_class.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/loading_game_class.py">
+      <file leaf-file-name="HistoryCheckersWindow.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/HistoryCheckersWindow.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="80">
-              <caret line="4" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="200">
+              <caret line="24" column="47" lean-forward="true" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+              <folding>
+                <element signature="e#0#20#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="HistoryCheckersWindow.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/HistoryCheckersWindow.py">
+      <file leaf-file-name="LoadedGameManager.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/LoadedGameManager.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="800">
-              <caret line="58" selection-start-line="58" selection-end-line="58" />
-              <folding>
-                <element signature="e#0#20#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="340">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
             </state>
           </provider>
         </entry>
@@ -56,7 +55,9 @@
       </file>
       <file leaf-file-name="correct_moves.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/correct_moves.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3780" />
+          </provider>
         </entry>
       </file>
       <file leaf-file-name="detect.py" pinned="false" current-in-tab="false">
@@ -64,6 +65,18 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="140">
               <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Options.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Options.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="900">
+              <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -77,7 +90,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CaptureCheckersWindow.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CaptureCheckersWindow.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CaptureCheckersWindow.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="200">
@@ -92,8 +105,11 @@
       <file leaf-file-name="Application.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Application.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="29" />
+            <state relative-caret-position="567">
+              <caret line="45" selection-start-line="45" selection-end-line="45" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -123,6 +139,7 @@
       <find>fra</find>
       <find>fram</find>
       <find>InitializeCamera</find>
+      <find>gra</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -154,6 +171,7 @@
         <option value="$PROJECT_DIR$/CaptureCheckersWindow.py" />
         <option value="$PROJECT_DIR$/Application.py" />
         <option value="$PROJECT_DIR$/Options.py" />
+        <option value="$PROJECT_DIR$/LoadedGameManager.py" />
         <option value="$PROJECT_DIR$/HistoryCheckersWindow.py" />
       </list>
     </option>
@@ -176,27 +194,6 @@
             <path>
               <item name="Checkers" type="b2602c69:ProjectViewProjectNode" />
               <item name="PT_Projekt" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Checkers" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PT_Projekt" type="462c0819:PsiDirectoryNode" />
-              <item name="games" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Checkers" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PT_Projekt" type="462c0819:PsiDirectoryNode" />
-              <item name="Image" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Checkers" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PT_Projekt" type="462c0819:PsiDirectoryNode" />
-              <item name="my_class" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Checkers" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PT_Projekt" type="462c0819:PsiDirectoryNode" />
-              <item name="my_class" type="462c0819:PsiDirectoryNode" />
-              <item name="Image" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -370,15 +367,17 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="2576" height="1096" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.10195313" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.31875" side_tool="true" visible="true" weight="0.18960245" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.68125" visible="true" weight="0.18960245" />
+      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.3191406" side_tool="true" visible="true" weight="0.18960245" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49960938" weight="0.3282365" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6808594" visible="true" weight="0.18960245" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.2746781" />
+      <window_info anchor="bottom" id="Terminal" order="7" sideWeight="0.49960938" weight="0.27420998" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49434572" weight="0.33436215" />
       <window_info id="Favorites" order="2" side_tool="true" weight="0.32985386" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -387,7 +386,6 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32837406" />
     </layout>
     <layout-to-restore>
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -594,7 +592,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/games/trial_game.txt">
+    <entry file="file://$PROJECT_DIR$/SavedGames/trial_game.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-880">
           <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
@@ -605,16 +603,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15300">
           <caret line="765" column="8" selection-start-line="765" selection-start-column="8" selection-end-line="765" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/correct_moves.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/detect.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="140">
-          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
         </state>
       </provider>
     </entry>
@@ -639,6 +627,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/CaptureCheckersWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/checkers_board_class.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="67">
@@ -649,63 +647,54 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/HistoryCheckersWindow.py">
+    <entry file="file://$PROJECT_DIR$/detect.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="800">
-          <caret line="58" selection-start-line="58" selection-end-line="58" />
-          <folding>
-            <element signature="e#0#20#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Application.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="2" selection-start-line="2" selection-end-line="2" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Options.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="55" selection-start-line="55" selection-end-line="55" />
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-            <element signature="e#184#303#0" />
-            <element signature="e#318#754#0" />
-            <element signature="e#1816#1941#0" />
-            <element signature="e#1207#1335#0" />
-            <element signature="e#1194#2174#0" />
-            <element signature="e#1399#1541#0" />
-            <element signature="e#1588#1689#0" />
-            <element signature="e#1739#1871#0" />
-            <element signature="e#1917#1983#0" />
-            <element signature="e#1369#1500#0" />
-            <element signature="e#1822#1883#0" />
-            <element signature="e#1746#1809#0" />
-            <element signature="e#1861#2503#0" />
-            <element signature="e#2539#2584#0" />
-          </folding>
+        <state relative-caret-position="140">
+          <caret line="8" column="28" selection-start-line="8" selection-start-column="28" selection-end-line="8" selection-end-column="28" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Prezentacje/text">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/loading_game_class.py">
+    <entry file="file://$PROJECT_DIR$/correct_moves.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="-3780" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Application.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="567">
+          <caret line="45" selection-start-line="45" selection-end-line="45" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CaptureCheckersWindow.py">
+    <entry file="file://$PROJECT_DIR$/LoadedGameManager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        <state relative-caret-position="340">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Options.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="45" lean-forward="true" selection-start-line="45" selection-end-line="45" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/HistoryCheckersWindow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="24" column="47" lean-forward="true" selection-start-line="24" selection-start-column="47" selection-end-line="24" selection-end-column="47" />
+          <folding>
+            <element signature="e#0#20#0" expanded="true" />
           </folding>
         </state>
       </provider>
