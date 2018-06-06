@@ -4,7 +4,7 @@ from loading_game_class import loading_game
 from checkers_board_class import Checkers_Board
 from detect import *
 
-gra = loading_game("games/trial_game.txt") #wczytaj gre pokazowa
+gra = loading_game("SavedGames/trial_game.txt") #wczytaj gre pokazowa
 
 
 class HistoryCheckersWindow:
