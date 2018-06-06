@@ -153,7 +153,7 @@
       <list>
         <option value="$PROJECT_DIR$/guiqwt.py" />
         <option value="$PROJECT_DIR$/Main.py" />
-        <option value="$USER_HOME$/Desktop/ESN-master/ESN-master/ESN.py" />
+        <option value="$PROJECT_DIR$/../../ESN-master/ESN-master/ESN.py" />
         <option value="$PROJECT_DIR$/check.py" />
         <option value="$PROJECT_DIR$/kamera.py" />
         <option value="$PROJECT_DIR$/loading_game.py" />
@@ -214,7 +214,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/easyesn-master" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
@@ -242,7 +242,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.pytong">
+  <component name="RunManager" selected="Python._Main">
     <configuration name="CaptureCheckersWindow (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Checkers" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -279,7 +279,7 @@
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
-    <configuration name="Main" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="_Main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="Checkers" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -291,7 +291,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Main.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/_Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -327,26 +327,26 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/pytong.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\Hubi\Desktop\PZ-githubbbbb\PT_Projekt\_Main.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
     </configuration>
     <list>
-      <item itemvalue="Python.Main" />
       <item itemvalue="Python.pytong" />
       <item itemvalue="Python.kamera" />
       <item itemvalue="Python.CaptureCheckersWindow" />
       <item itemvalue="Python.CaptureCheckersWindow (1)" />
+      <item itemvalue="Python._Main" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python._Main" />
         <item itemvalue="Python.pytong" />
         <item itemvalue="Python.CaptureCheckersWindow (1)" />
         <item itemvalue="Python.CaptureCheckersWindow" />
         <item itemvalue="Python.kamera" />
-        <item itemvalue="Python.Main" />
       </list>
     </recent_temporary>
   </component>
@@ -489,7 +489,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/pyESN-master/pyESN-master/mackey.ipynb" />
+    <entry file="file://$PROJECT_DIR$/../../pyESN-master/pyESN-master/mackey.ipynb" />
     <entry file="file://C:/Python36/Lib/unittest/case.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="735">
@@ -497,8 +497,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/pyESN-master/pyESN-master/testing.py" />
-    <entry file="file://$USER_HOME$/Desktop/pyESN-master/pyESN-master/pyESN.py" />
+    <entry file="file://$PROJECT_DIR$/../../pyESN-master/pyESN-master/testing.py" />
+    <entry file="file://$PROJECT_DIR$/../../pyESN-master/pyESN-master/pyESN.py" />
     <entry file="file://C:/Python36/Lib/json/decoder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="427">
@@ -527,8 +527,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/simple_esn-master/simple_esn-master/simple_esn.py" />
-    <entry file="file://$USER_HOME$/Desktop/simple_esn-master/simple_esn-master/plot_mackey_glass.py" />
+    <entry file="file://$PROJECT_DIR$/../../simple_esn-master/simple_esn-master/simple_esn.py" />
+    <entry file="file://$PROJECT_DIR$/../../simple_esn-master/simple_esn-master/plot_mackey_glass.py" />
     <entry file="file://C:/Python36/Lib/site-packages/sklearn/preprocessing/data.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -536,7 +536,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/ESN-master/ESN-master/ESN.py" />
+    <entry file="file://$PROJECT_DIR$/../../ESN-master/ESN-master/ESN.py" />
     <entry file="file://C:/Python36/Lib/site-packages/sklearn/base.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="193">
@@ -565,7 +565,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/Desktop/simple_esn-master/simple_esn-master/test_simple_esn.py" />
+    <entry file="file://$PROJECT_DIR$/../../simple_esn-master/simple_esn-master/test_simple_esn.py" />
     <entry file="file://$PROJECT_DIR$/Main.py" />
     <entry file="file://C:/Python36/Lib/site-packages/matplotlib/cbook/deprecation.py">
       <provider selected="true" editor-type-id="text-editor">
