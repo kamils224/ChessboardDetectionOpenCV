@@ -57,8 +57,6 @@ class HistoryCheckersWindow:
 
         scrollbar.config(command=mylist.yview)
 
-        self.video_loop()
-
 
     def move_forward(self):
         if self.actual_round < len(gra.game_history) - 1:
