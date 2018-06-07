@@ -10,13 +10,13 @@ from threading import Thread
 class CaptureCheckersWindow:
     def __init__(self, ip=0,vs=None, output_path="./",):
         if vs==None:
-            self.vs = cv2.VideoCapture(ip)
+            self.vs = cv2.VideoCapture('http://192.168.137.58:4747/video%27')
         else:
             self.vs = vs
 
-        self.rozpoznawania = BoardDetection('http://192.168.137.36:4747/video%27')
-        t = Thread(target =self.rozpoznawania.StartDetection())
-        t.start()
+        self.rozpoznawania = BoardDetection('http://192.168.137.58:4747/video%27')
+        #t = Thread(target =self.rozpoznawania.StartDetection())
+        #t.start()
 
         self.output_path = output_path  # sciezka wyjsciowa
         self.current_image = None  # aktualny obraz z kamery
@@ -52,7 +52,7 @@ class CaptureCheckersWindow:
 
         self.board_game = Checkers_Board(szachownica, self.Checkers_panel, Matrix888)
 
-       # self.video_loop()
+        self.video_loop()
 
     def Initialize(self):
         helv36 = tkfont.Font(family='Helvetica', size=15, weight='bold')
@@ -73,6 +73,11 @@ class CaptureCheckersWindow:
     def video_loop(self):
         ok, frame = self.vs.read()  # read frame from video stream
         if ok:  # frame captured without any errors
+
+            new_img=self.rozpoznawania.Detect(frame=frame,detector= self.rozpoznawania.ConfigureBlobDetector())
+
+
+
             cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)  # convert colors from BGR to RGBA
 
             self.current_image = Image.fromarray(cv2image)  # convert image for PIL

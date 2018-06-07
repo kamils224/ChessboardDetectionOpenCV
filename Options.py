@@ -78,7 +78,7 @@ class OptionsClass:
             CaptureCheckersWindow(vs=self.vs)
         else:
             CaptureCheckersWindow(ip=self.CameraIPTextBox.get())
-        self.OptionsWindow.destroy()
+        #self.OptionsWindow.destroy()
 
 
     def InitializeCamera(self):
