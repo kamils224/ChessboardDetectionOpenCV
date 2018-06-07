@@ -15,7 +15,7 @@ class OptionsClass:
         self.OptionsWindow = tk.Toplevel()  # inicjalizacja rooota
         self.OptionsWindow.title("Options")  # tytul okna
         self.OptionsWindow.protocol('WM_DELETE_WINDOW', self.destructor) # destrucor odpala się po zamknięciu okna
-        self.CameraIPTextBox = tk.StringVar(self.OptionsWindow, value='http://192.168.1.101:4747/video%27')
+        self.CameraIPTextBox = tk.StringVar(self.OptionsWindow, value='http://192.168.137.36:4747/video%27')
         self.InitializePanels()
         self.InitializeCameraPanel()
         self.video_loop()
@@ -74,8 +74,12 @@ class OptionsClass:
         self.Camerapanel.grid(row=0, column=0)  # pozycjonowanie panelu
 
     def GoToCaptureCheckers(self):
-        self.destructor()
-        CaptureCheckersWindow(ip=self.CameraIPTextBox.get())
+        if self.vs.isOpened():
+            CaptureCheckersWindow(vs=self.vs)
+        else:
+            CaptureCheckersWindow(ip=self.CameraIPTextBox.get())
+        self.OptionsWindow.destroy()
+
 
     def InitializeCamera(self):
         self.vs = cv2.VideoCapture(self.CameraIPTextBox.get()) # klatki z kamerki, 0 to domyślna
