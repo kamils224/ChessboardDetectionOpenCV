@@ -36,7 +36,7 @@ class Application:
         self.button1 = tk.Button(self.background, text="Rozpocznij nową rozgrywkę", command=self.RunCaptureCheckers,
                                  font=helv36).grid(row=0, column=0, padx=(250, 250), pady=(230, 0))
 
-        self.button2 = tk.Button(self.background, text="Wczytaj z Historii", command=self.RunHistoryCheckers,
+        self.button2 = tk.Button(self.background, text="Wczytaj z historii", command=self.RunHistoryCheckers,
                                  font=helv36).grid(row=1, column=0, padx=(250, 250), pady=(35, 160))
 
     def RunCaptureCheckers(self):

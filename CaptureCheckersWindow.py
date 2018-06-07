@@ -1,8 +1,10 @@
 from PIL import Image, ImageTk
 import tkinter as tk
-
+import tkinter.font as tkfont
 from checkers_board_class import Checkers_Board
+from BoardDetection import BoardDetection
 from detect import *
+from threading import Thread
 
 
 class CaptureCheckersWindow:
@@ -12,6 +14,10 @@ class CaptureCheckersWindow:
         else:
             self.vs = vs
 
+        self.rozpoznawania = BoardDetection('http://192.168.137.36:4747/video%27')
+        t = Thread(target =self.rozpoznawania.StartDetection())
+        t.start()
+
         self.output_path = output_path  # sciezka wyjsciowa
         self.current_image = None  # aktualny obraz z kamery
         self.actual_round = 0;
@@ -20,18 +26,19 @@ class CaptureCheckersWindow:
         self.root.title("Checkers")  # tytul okna
         self.root.protocol('WM_DELETE_WINDOW', self.destructor) # destrucor odpala się po zamknięciu okna
 
-        frameleft = tk.Frame(self.root)
-        frameleft.grid(row=0, column=0)
+        self.frameleft = tk.Frame(self.root)
+        self.frameleft.grid(row=0, column=0)
 
-        self.panel = tk.Label(frameleft)  # inicjalizacja panelu z kamera
+        self.panel = tk.Label(self.frameleft)  # inicjalizacja panelu z kamera
         self.panel.pack(side="top", fill="both", expand=1)
 
-        self.panel2 = tk.Label(frameleft)
+        self.panel2 = tk.Label(self.frameleft)
         self.panel2.pack(side="bottom", fill="both", expand=1)
 
         self.Checkers_panel = tk.Label(self.root)
         self.Checkers_panel.grid(row=0, column=1)
 
+        self.Initialize()
         szachownica = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
 
         lista = DetectBoard()
@@ -45,7 +52,23 @@ class CaptureCheckersWindow:
 
         self.board_game = Checkers_Board(szachownica, self.Checkers_panel, Matrix888)
 
-        self.video_loop()
+       # self.video_loop()
+
+    def Initialize(self):
+        helv36 = tkfont.Font(family='Helvetica', size=15, weight='bold')
+
+        player1 = tk.Button(self.frameleft, text="Wykonaj Ruch", command=self.Catch,
+                            font=helv36).pack(side="bottom", fill="both", expand=1)
+
+        tk.Label(self.frameleft, text="Niebieski").pack(side="bottom", fill="both", expand=1)
+
+        tk.Label(self.frameleft, text="Czerwony").pack(side="bottom", fill="both", expand=1)
+
+
+    def Catch(self):
+        self.rozpoznawania.button_clicked=True
+        print (self.rozpoznawania.result_list)
+
 
     def video_loop(self):
         ok, frame = self.vs.read()  # read frame from video stream

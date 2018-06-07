@@ -32,7 +32,7 @@ class BoardDetection:
 
     board_blocks = []
 
-
+    result_list = np.zeros(64, dtype=int)
     button_clicked = False
 
     def __init__(self, device=0, width=800, height=600):
