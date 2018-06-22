@@ -32,7 +32,6 @@ class BoardDetection:
 
     board_blocks = []
 
-    button_clicked = False
 
     def __init__(self, device=0, width=800, height=600):
         self.result_list = np.zeros(64, dtype=int)
@@ -178,41 +177,37 @@ class BoardDetection:
             board = cv2.drawKeypoints(board, yellow_keypoints, np.array([]), (255, 0, 0),
                                       cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
+            # result_list = np.zeros(64, dtype=int)
 
+            for point in blue_keypoints:
+                x = point.pt[0]
+                y = point.pt[1]
+                index = self.CheckPawnLocation(self.board_blocks, x, y)
+                if (index is not None):
+                    self.result_list[index] = 1
 
-            if (True):
+            for point in purple_keypoints:
+                x = point.pt[0]
+                y = point.pt[1]
+                index = self.CheckPawnLocation(self.board_blocks, x, y)
+                if (index is not None):
+                    self.result_list[index] = 3
 
-                #result_list = np.zeros(64, dtype=int)
+            for point in red_keypoints:
+                x = point.pt[0]
+                y = point.pt[1]
+                index = self.CheckPawnLocation(self.board_blocks, x, y)
+                if (index is not None):
+                    self.result_list[index] = 2
 
-                for point in blue_keypoints:
-                    x = point.pt[0]
-                    y = point.pt[1]
-                    index = self.CheckPawnLocation(self.board_blocks, x, y)
-                    if (index is not None):
-                        self.result_list[index] = 1
+            for point in yellow_keypoints:
+                x = point.pt[0]
+                y = point.pt[1]
+                index = self.CheckPawnLocation(self.board_blocks, x, y)
+                if (index is not None):
+                    self.result_list[index] = 4
+            return board
 
-                for point in purple_keypoints:
-                    x = point.pt[0]
-                    y = point.pt[1]
-                    index = self.CheckPawnLocation(self.board_blocks, x, y)
-                    if (index is not None):
-                        self.result_list[index] = 3
-
-                for point in red_keypoints:
-                    x = point.pt[0]
-                    y = point.pt[1]
-                    index = self.CheckPawnLocation(self.board_blocks, x, y)
-                    if (index is not None):
-                        self.result_list[index] = 2
-
-                for point in yellow_keypoints:
-                    x = point.pt[0]
-                    y = point.pt[1]
-                    index = self.CheckPawnLocation(self.board_blocks, x, y)
-                    if (index is not None):
-                        self.result_list[index] = 4
-                self.button_clicked=False
-                return board
 
 
     def StartDetection(self):
@@ -352,6 +347,8 @@ class BoardDetection:
                     if (index is not None):
                         self.result_list[index] = 4
 
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
 
         # When everything done, release the capture
 
