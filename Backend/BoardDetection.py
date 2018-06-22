@@ -217,7 +217,7 @@ class BoardDetection:
 
     def StartDetection(self):
         detector = self.ConfigureBlobDetector()
-        cap = cv2.VideoCapture(self.video_device)
+        cap = cv2.VideoCapture('http://192.168.1.31:4747/video')
 
 
         while True:
@@ -242,6 +242,8 @@ class BoardDetection:
             keypoints = detector.detect(inverted_mask)
             im_with_keypoints = cv2.drawKeypoints(img, keypoints, np.array([]), (0, 0, 255),
                                                   cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
+
+            cv2.imshow('Camera',frame)
 
             markers_position = []
 
@@ -322,40 +324,35 @@ class BoardDetection:
 
                 cv2.imshow('Pawns', board)
 
-                if (True):
+                for point in blue_keypoints:
+                    x = point.pt[0]
+                    y = point.pt[1]
+                    index = self.CheckPawnLocation(self.board_blocks, x, y)
+                    if (index is not None):
+                        self.result_list[index] = 1
 
-                    result_list = np.zeros(64, dtype=int)
+                for point in purple_keypoints:
+                    x = point.pt[0]
+                    y = point.pt[1]
+                    index = self.CheckPawnLocation(self.board_blocks, x, y)
+                    if (index is not None):
+                        self.result_list[index] = 3
 
-                    for point in blue_keypoints:
-                        x = point.pt[0]
-                        y = point.pt[1]
-                        index = self.CheckPawnLocation(self.board_blocks, x, y)
-                        if (index is not None):
-                            result_list[index] = 1
+                for point in red_keypoints:
+                    x = point.pt[0]
+                    y = point.pt[1]
+                    index = self.CheckPawnLocation(self.board_blocks, x, y)
+                    if (index is not None):
+                        self.result_list[index] = 2
 
-                    for point in purple_keypoints:
-                        x = point.pt[0]
-                        y = point.pt[1]
-                        index = self.CheckPawnLocation(self.board_blocks, x, y)
-                        if (index is not None):
-                            result_list[index] = 3
+                for point in yellow_keypoints:
+                    x = point.pt[0]
+                    y = point.pt[1]
+                    index = self.CheckPawnLocation(self.board_blocks, x, y)
+                    if (index is not None):
+                        self.result_list[index] = 4
 
-                    for point in red_keypoints:
-                        x = point.pt[0]
-                        y = point.pt[1]
-                        index = self.CheckPawnLocation(self.board_blocks, x, y)
-                        if (index is not None):
-                            result_list[index] = 2
-
-                    for point in yellow_keypoints:
-                        x = point.pt[0]
-                        y = point.pt[1]
-                        index = self.CheckPawnLocation(self.board_blocks, x, y)
-                        if (index is not None):
-                            result_list[index] = 4
-
-                    button_clicked = False
-
+                print(self.result_list)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
                 break

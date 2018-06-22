@@ -76,7 +76,7 @@ def CheckPawnLocation(board=[], x=0, y=0):
     return None
 
 
-cap = cv2.VideoCapture('http://192.168.137.69:4747/video')
+cap = cv2.VideoCapture('http://192.168.1.31:4747/video')
 #cap = cv2.VideoCapture(0)
 
 width = 800
@@ -129,6 +129,7 @@ while True:
 
     markers_position = []
 
+    cv2.imshow('Camera',frame)
 
     if len(keypoints) == 4:
         for i in keypoints:

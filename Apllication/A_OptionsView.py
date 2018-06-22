@@ -79,7 +79,7 @@ class OptionsClass:
         #else:
          #   CaptureCheckersWindow(ip=self.CameraIPTextBox.get())
 
-        CaptureCheckersWindow(ip ='http://192.168.137.69:4747/video%27')
+        CaptureCheckersWindow(ip ='http://192.168.1.31:4747/video%27')
         #self.OptionsWindow.destroy()
 
     def InitializeCamera(self):
