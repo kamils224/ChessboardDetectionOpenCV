@@ -5,18 +5,19 @@ from checkers_board_class import Checkers_Board
 from BoardDetection import BoardDetection
 from detect import *
 from threading import Thread
+from LoadedGameManager import *
 
 
 class CaptureCheckersWindow:
     def __init__(self, ip=0,vs=None, output_path="./",):
         if vs==None:
-            self.vs = cv2.VideoCapture('http://192.168.137.58:4747/video%27')
+            self.vs = cv2.VideoCapture(ip)
         else:
             self.vs = vs
 
-        self.rozpoznawania = BoardDetection('http://192.168.137.58:4747/video%27')
-        #t = Thread(target =self.rozpoznawania.StartDetection())
-        #t.start()
+        self.rozpoznawania = BoardDetection()
+        self.konfiguracjakamila = self.rozpoznawania.ConfigureBlobDetector()
+
 
         self.output_path = output_path  # sciezka wyjsciowa
         self.current_image = None  # aktualny obraz z kamery
@@ -37,6 +38,10 @@ class CaptureCheckersWindow:
 
         self.Checkers_panel = tk.Label(self.root)
         self.Checkers_panel.grid(row=0, column=1)
+
+        self.gra = LoadedGameManager("SavedGames/trial_game.txt")
+        szachownica = cv2.imread('Image/szachownica.png')
+        self.board_game = Checkers_Board(szachownica, self.Checkers_panel, self.gra.return_round(0))
 
         self.Initialize()
         szachownica = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
@@ -64,7 +69,6 @@ class CaptureCheckersWindow:
 
         tk.Label(self.frameleft, text="Czerwony").pack(side="bottom", fill="both", expand=1)
 
-
     def Catch(self):
         self.rozpoznawania.button_clicked=True
         print (self.rozpoznawania.result_list)
@@ -74,9 +78,22 @@ class CaptureCheckersWindow:
         ok, frame = self.vs.read()  # read frame from video stream
         if ok:  # frame captured without any errors
 
-            new_img=self.rozpoznawania.Detect(frame=frame,detector= self.rozpoznawania.ConfigureBlobDetector())
+            new_img = self.rozpoznawania.Detect(frame=frame, detector=self.konfiguracjakamila)
 
+            lista = self.rozpoznawania.result_list
+            if new_img is not None:
+                cv2.imshow('dwaaa',new_img)
 
+            b = [[0 for x in range(8)] for y in range(8)]
+            for y in range(8):
+                for x in range(8):
+                    if(lista[x+y]==1):
+                        ok=2
+                    b[x][y] = lista[x+y]
+            print(b)
+
+            #print(b)
+            self.board_game.draw(b, 0)
 
             cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)  # convert colors from BGR to RGBA
 

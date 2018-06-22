@@ -32,10 +32,10 @@ class BoardDetection:
 
     board_blocks = []
 
-    result_list = np.zeros(64, dtype=int)
     button_clicked = False
 
     def __init__(self, device=0, width=800, height=600):
+        self.result_list = np.zeros(64, dtype=int)
         self.video_device = device
         self.width = width
         self.height = height
@@ -179,39 +179,39 @@ class BoardDetection:
                                       cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
 
+
             if (True):
 
-                result_list = np.zeros(64, dtype=int)
+                #result_list = np.zeros(64, dtype=int)
 
                 for point in blue_keypoints:
                     x = point.pt[0]
                     y = point.pt[1]
                     index = self.CheckPawnLocation(self.board_blocks, x, y)
                     if (index is not None):
-                        result_list[index] = 1
+                        self.result_list[index] = 1
 
                 for point in purple_keypoints:
                     x = point.pt[0]
                     y = point.pt[1]
                     index = self.CheckPawnLocation(self.board_blocks, x, y)
                     if (index is not None):
-                        result_list[index] = 3
+                        self.result_list[index] = 3
 
                 for point in red_keypoints:
                     x = point.pt[0]
                     y = point.pt[1]
                     index = self.CheckPawnLocation(self.board_blocks, x, y)
                     if (index is not None):
-                        result_list[index] = 2
+                        self.result_list[index] = 2
 
                 for point in yellow_keypoints:
                     x = point.pt[0]
                     y = point.pt[1]
                     index = self.CheckPawnLocation(self.board_blocks, x, y)
                     if (index is not None):
-                        result_list[index] = 4
-
-                print(result_list)
+                        self.result_list[index] = 4
+                self.button_clicked=False
                 return board
 
 
