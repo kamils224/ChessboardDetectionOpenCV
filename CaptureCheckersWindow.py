@@ -3,9 +3,8 @@ import tkinter as tk
 import tkinter.font as tkfont
 from checkers_board_class import Checkers_Board
 from BoardDetection import BoardDetection
-from detect import *
-from threading import Thread
 from LoadedGameManager import *
+import cv2 as cv2
 
 
 class CaptureCheckersWindow:
@@ -46,7 +45,7 @@ class CaptureCheckersWindow:
         self.Initialize()
         szachownica = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
 
-        lista = DetectBoard()
+        lista = BoardDetection.Detect()
         Matrix888 = [[0 for x in range(8)] for y in range(8)]
 
         i =0
