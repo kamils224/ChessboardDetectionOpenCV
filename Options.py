@@ -2,7 +2,7 @@ from PIL import Image, ImageTk
 import tkinter as tk
 
 from CaptureCheckersWindow import CaptureCheckersWindow
-from detect import *
+from BoardDetection import *
 
 
 class OptionsClass:
