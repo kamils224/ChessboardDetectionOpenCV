@@ -1,9 +1,9 @@
 from PIL import Image, ImageTk
 import tkinter as tk
 import tkinter.font as tkfont
-from checkers_board_class import Checkers_Board
-from BoardDetection import BoardDetection
-from LoadedGameManager import *
+from Backend.CheckersVisualization import Checkers_Board
+from Backend.BoardDetection import BoardDetection
+from Backend.LoadedGameManager import *
 import cv2 as cv2
 
 

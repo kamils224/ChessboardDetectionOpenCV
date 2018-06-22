@@ -1,8 +1,8 @@
 from PIL import Image, ImageTk
 import tkinter as tk
 
-from CaptureCheckersWindow import CaptureCheckersWindow
-from BoardDetection import *
+from Apllication.A_CaptureView import CaptureCheckersWindow
+from Backend.BoardDetection import *
 
 
 class OptionsClass:
@@ -81,7 +81,6 @@ class OptionsClass:
 
         CaptureCheckersWindow(ip ='http://192.168.137.69:4747/video%27')
         #self.OptionsWindow.destroy()
-
 
     def InitializeCamera(self):
         self.vs = cv2.VideoCapture(self.CameraIPTextBox.get()) # klatki z kamerki, 0 to domyślna

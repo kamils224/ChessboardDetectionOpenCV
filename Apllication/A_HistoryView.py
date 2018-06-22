@@ -1,7 +1,6 @@
 import tkinter as tk
-from checkers_board_class import Checkers_Board
+from Backend.CheckersVisualization import Checkers_Board
 import tkinter.font as tkfont
-from detect import *
 
 
 

@@ -3,9 +3,9 @@ import tkinter as tk
 import tkinter.font as tkfont
 import cv2
 
-from HistoryCheckersWindow import HistoryCheckersWindow
-from LoadedGameManager import LoadedGameManager
-from Options import OptionsClass
+from Apllication.A_HistoryView import HistoryCheckersWindow
+from Backend.LoadedGameManager import LoadedGameManager
+from Apllication.A_OptionsView import OptionsClass
 
 class Application:
     def __init__(self):
