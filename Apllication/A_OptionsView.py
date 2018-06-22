@@ -13,7 +13,7 @@ class OptionsClass:
         self.OptionsWindow = tk.Toplevel()  # inicjalizacja rooota
         self.OptionsWindow.title("Options")  # tytul okna
         self.OptionsWindow.protocol('WM_DELETE_WINDOW', self.destructor) # destrucor odpala się po zamknięciu okna
-        self.CameraIP = tk.StringVar(self.OptionsWindow, value='http://192.168.137.70:4747/video%27')
+        self.CameraIP = tk.StringVar(self.OptionsWindow, value='http://192.168.1.31:4747/video%27')
         self.InitializePanels()
         self.center()
 
