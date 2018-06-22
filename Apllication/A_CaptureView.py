@@ -12,6 +12,7 @@ import threading
 class CaptureCheckersWindow:
     def __init__(self, ip=0):
         self.rozpoznawania = BoardDetection()
+        self.rozpoznawania.video_device=ip
         self.root = tk.Toplevel()  # inicjalizacja rooota
         self.root.title("Checkers")  # tytul okna
         self.root.protocol('WM_DELETE_WINDOW', self.destructor) # destrucor odpala się po zamknięciu okna

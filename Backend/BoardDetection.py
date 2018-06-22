@@ -217,7 +217,7 @@ class BoardDetection:
 
     def StartDetection(self):
         detector = self.ConfigureBlobDetector()
-        cap = cv2.VideoCapture('http://192.168.1.31:4747/video')
+        cap = cv2.VideoCapture(self.video_device)
 
 
         while True:
@@ -352,10 +352,6 @@ class BoardDetection:
                     if (index is not None):
                         self.result_list[index] = 4
 
-                print(self.result_list)
-
-            if cv2.waitKey(1) & 0xFF == ord('q'):
-                break
 
         # When everything done, release the capture
 
