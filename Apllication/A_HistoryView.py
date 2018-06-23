@@ -1,7 +1,7 @@
 import tkinter as tk
 from Backend.CheckersVisualization import Checkers_Board
 import tkinter.font as tkfont
-
+import cv2 as cv2
 
 
 class HistoryCheckersWindow:

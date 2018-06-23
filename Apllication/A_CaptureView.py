@@ -45,16 +45,17 @@ class CaptureCheckersWindow:
         tk.Label(self.panel2, text="Czerwony").pack(side="bottom", fill="both", expand=1)
 
     def Catch(self):
-        lista = self.rozpoznawania.result_list
-
+        plansza = self.rozpoznawania.result_list
+        print(plansza)
         MatrixDraw = [[0 for x in range(8)] for y in range(8)]
         i = 0
-        for y in range(0, 8):
-            for x in range(0, 8):
-                 MatrixDraw[x][y] = lista[i]
+        for x in range(0, 8):
+            for y in range(0, 8):
+                 MatrixDraw[x][y] = plansza[i]
                  i += 1
 
-        self.board_game.draw(MatrixDraw,1)
+        print(MatrixDraw)
+        self.board_game.draw(MatrixDraw,0)
 
     def video_loop(self):
         t=threading.Thread(target=self.rozpoznawania.StartDetection)
