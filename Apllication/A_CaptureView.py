@@ -1,21 +1,79 @@
 from PIL import Image, ImageTk
 import tkinter as tk
 import tkinter.font as tkfont
+from tkinter import messagebox
 from Backend.CheckersVisualization import Checkers_Board
 from Backend.BoardDetection import BoardDetection
 from Backend.LoadedGameManager import *
-import cv2 as cv2
+import cv2
 import threading
+from Backend.correct_moves import check_move
 
+from tkinter import *
+
+class ToolTip(object):
+
+    player1=True
+    player2=False
+
+    def __init__(self, widget):
+        self.widget = widget
+        self.tipwindow = None
+        self.id = None
+        self.x = self.y = 0
+
+    def showtip(self, text):
+        "Display text in tooltip window"
+        self.text = text
+        if self.tipwindow or not self.text:
+            return
+        x, y, cx, cy = self.widget.bbox("insert")
+        x = x + self.widget.winfo_rootx() + 27
+        y = y + cy + self.widget.winfo_rooty() +27
+        self.tipwindow = tw = Toplevel(self.widget)
+        tw.wm_overrideredirect(1)
+        tw.wm_geometry("+%d+%d" % (x, y))
+        try:
+            # For Mac OS
+            tw.tk.call("::tk::unsupported::MacWindowStyle",
+                       "style", tw._w,
+                       "help", "noActivates")
+        except TclError:
+            pass
+        label = Label(tw, text=self.text, justify=LEFT,
+                      background="#ffffe0", relief=SOLID, borderwidth=1,
+                      font=("tahoma", "8", "normal"))
+        label.pack(ipadx=1)
+
+    def hidetip(self):
+        tw = self.tipwindow
+        self.tipwindow = None
+        if tw:
+            tw.destroy()
+
+def createToolTip(widget, text):
+    toolTip = ToolTip(widget)
+    def enter(event):
+        toolTip.showtip(text)
+    def leave(event):
+        toolTip.hidetip()
+    widget.bind('<Enter>', enter)
+    widget.bind('<Leave>', leave)
 
 
 class CaptureCheckersWindow:
+    MatrixBefore = [[0 for x in range(8)] for y in range(8)]
+
     def __init__(self, ip=0):
-        self.rozpoznawania = BoardDetection()
-        self.rozpoznawania.video_device=ip
+        self.detection = BoardDetection()
+        self.detection.video_device = ip
         self.root = tk.Toplevel()  # inicjalizacja rooota
         self.root.title("Checkers")  # tytul okna
-        self.root.protocol('WM_DELETE_WINDOW', self.destructor) # destrucor odpala się po zamknięciu okna
+        self.root.protocol('WM_DELETE_WINDOW', self.destructor)  # destrucor odpala się po zamknięciu okna
+
+        for x in range(0, 8):
+            for y in range(0, 8):
+                self.MatrixBefore[x][y] = 0
 
         self.Checkers_panel = tk.Label(self.root)
         self.Checkers_panel.grid(row=0, column=0)
@@ -32,33 +90,94 @@ class CaptureCheckersWindow:
 
     def DeafaultBoard(self):
         self.Initialize()
-        szachownica = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
+        boardImage = cv2.imread('Image/szachownica.png')  # wczytanie szablonu , tła do warcab
         Matrix888 = [[0 for x in range(8)] for y in range(8)]
-        self.board_game = Checkers_Board(szachownica, self.Checkers_panel, Matrix888)
+        self.board_game = Checkers_Board(boardImage, self.Checkers_panel, Matrix888)
 
     def Initialize(self):
         helv36 = tkfont.Font(family='Helvetica', size=15, weight='bold')
 
-        player1 = tk.Button(self.panel2, text="Wykonaj Ruch", command=self.Catch,
-                            font=helv36).pack(side="bottom", fill="both", expand=1)
-        tk.Label(self.panel2, text="Niebieski").pack(side="bottom", fill="both", expand=1)
-        tk.Label(self.panel2, text="Czerwony").pack(side="bottom", fill="both", expand=1)
+        MoveButton = tk.Button(self.panel2, text="Wykonaj Ruch", command=self.Catch,
+                               font=helv36)
+        MoveButton.pack(side="right", fill="both", expand=1)
+
+        NewGameButton = tk.Button(self.panel2, text="Nowa gra", command=self.StartGame,
+                                  font=helv36)
+        NewGameButton.pack(side="left", fill="both", expand=1)
+
+        ResetPawnsButton = tk.Button(self.panel2, text="Resetuj pozycje", command=self.SetPawns,
+                                     font=helv36)
+        ResetPawnsButton.pack(side="left", fill="both", expand=1)
+
+        createToolTip(MoveButton,"Pobiera aktualną pozycję pionków i sprawdza poprawność ruchu")
+        createToolTip(NewGameButton,"Pobiera pozycję pionków i sprawdza czy ustawienie jest zgodne z początkiem gry")
+        createToolTip(ResetPawnsButton,"Aktualizacja pozycji pionków bez sprawdzenia poprawności ruchu, używać tylko w przypadku błędów")
+
+        self.InfoLabel = tk.Label(self.panel2, text="Rozpocznij nową grę")
+        self.InfoLabel.pack(side="bottom", fill="both", expand=1)
+        self.InfoLabel.config(width=25, font=("Courier", 30))
+
+        self.CurrentPlayerLaber = tk.Label(self.panel2, text="Brak pionków")
+        self.CurrentPlayerLaber.pack(side="bottom", fill="both", expand=1)
+        self.CurrentPlayerLaber.config(width=25, font=("Courier", 30))
 
     def Catch(self):
-        plansza = self.rozpoznawania.result_list
-        print(plansza)
+
+        board = self.detection.result_list
+        print(board)
         MatrixDraw = [[0 for x in range(8)] for y in range(8)]
         i = 0
         for x in range(0, 8):
             for y in range(0, 8):
-                 MatrixDraw[x][y] = plansza[i]
-                 i += 1
+                MatrixDraw[x][y] = board[i]
+                i += 1
 
+        print(self.MatrixBefore)
         print(MatrixDraw)
-        self.board_game.draw(MatrixDraw,0)
+
+        # sprawdzenie poprawności ruchu
+        correct=check_move(self.MatrixBefore, MatrixDraw, False, True)
+
+        # jeżeli ruch był poprawny zaktualizuj macierz
+        if correct is None:
+            pass
+        elif correct[0]:
+            # rysowanie planszy
+            self.board_game.draw(MatrixDraw, 0)
+            self.MatrixBefore = MatrixDraw
+        else:
+            messagebox.showinfo('Błąd',correct[1]+'\nCofnij pionek na właściwe miejsce')
+
+    def StartGame(self):
+
+        result = messagebox.askokcancel('Nowa gra', 'Czy na pewno chcesz rozpocząć nową grę?')
+
+        if result is True:
+            board = self.detection.result_list
+            MatrixDraw = [[0 for x in range(8)] for y in range(8)]
+            i = 0
+            for x in range(0, 8):
+                for y in range(0, 8):
+                    MatrixDraw[x][y] = board[i]
+                    i += 1
+
+            self.board_game.draw(MatrixDraw, 0)
+        else:
+            pass
+
+    def SetPawns(self):
+        board = self.detection.result_list
+        MatrixDraw = [[0 for x in range(8)] for y in range(8)]
+        i = 0
+        for x in range(0, 8):
+            for y in range(0, 8):
+                MatrixDraw[x][y] = board[i]
+                i += 1
+        self.MatrixBefore=MatrixDraw
+        self.board_game.draw(MatrixDraw, 0)
 
     def video_loop(self):
-        t=threading.Thread(target=self.rozpoznawania.StartDetection)
+        t = threading.Thread(target=self.detection.StartDetection)
         t.start()
 
     def destructor(self):

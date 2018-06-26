@@ -1,100 +1,100 @@
 import copy
 
-rows = 8
-columns = 8
-#Matrix_before plansza przed wykonaniem ruchu
-Matrix_before = [[0 for x in range(rows)] for y in range(columns)]
-
-Matrix_before[0][1] = 1
-Matrix_before[0][3] = 1
-Matrix_before[0][5] = 1
-Matrix_before[0][7] = 1
-
-Matrix_before[1][0] = 0
-Matrix_before[1][2] = 1
-Matrix_before[1][4] = 1
-Matrix_before[1][6] = 1
-
-Matrix_before[2][1] = 1
-Matrix_before[2][3] = 0
-Matrix_before[2][5] = 1
-Matrix_before[2][7] = 3
-
-Matrix_before[3][0] = 0
-Matrix_before[3][2] = 0
-Matrix_before[3][4] = 2
-Matrix_before[3][6] = 2
-
-Matrix_before[4][1] = 2
-Matrix_before[4][3] = 0
-Matrix_before[4][5] = 0
-Matrix_before[4][7] = 0
-
-Matrix_before[5][0] = 1
-Matrix_before[5][2] = 0
-Matrix_before[5][4] = 2
-Matrix_before[5][6] = 2
-
-Matrix_before[6][1] = 0
-Matrix_before[6][3] = 0
-Matrix_before[6][5] = 2
-Matrix_before[6][7] = 2
-
-Matrix_before[7][0] = 2
-Matrix_before[7][2] = 2
-Matrix_before[7][4] = 2
-Matrix_before[7][6] = 0
-
-
-''' Matrix_before - plansza po wykonaniu ruchu (bez zdejmowania zbitych pionków)'''
-Matrix_after = [[0 for x in range(rows)] for y in range(columns)]
-
-Matrix_after[0][1] = 1
-Matrix_after[0][3] = 1
-Matrix_after[0][5] = 1
-Matrix_after[0][7] = 1
-
-Matrix_after[1][0] = 0
-Matrix_after[1][2] = 1
-Matrix_after[1][4] = 1
-Matrix_after[1][6] = 1
-
-Matrix_after[2][1] = 1
-Matrix_after[2][3] = 0
-Matrix_after[2][5] = 1
-Matrix_after[2][7] = 3
-
-Matrix_after[3][0] = 0
-Matrix_after[3][2] = 0
-Matrix_after[3][4] = 2
-Matrix_after[3][6] = 2
-
-Matrix_after[4][1] = 2
-Matrix_after[4][3] = 0
-Matrix_after[4][5] = 0
-Matrix_after[4][7] = 0
-
-Matrix_after[5][0] = 1
-Matrix_after[5][2] = 0
-Matrix_after[5][4] = 2
-Matrix_after[5][6] = 2
-
-Matrix_after[6][1] = 0
-Matrix_after[6][3] = 0
-Matrix_after[6][5] = 2
-Matrix_after[6][7] = 2
-
-Matrix_after[7][0] = 2
-Matrix_after[7][2] = 2
-Matrix_after[7][4] = 2
-Matrix_after[7][6] = 0
-
-player_2 = False;
-player_1 = True;
+# rows = 8
+# columns = 8
+# #Matrix_before plansza przed wykonaniem ruchu
+# Matrix_before = [[0 for x in range(rows)] for y in range(columns)]
+#
+# Matrix_before[0][1] = 1
+# Matrix_before[0][3] = 1
+# Matrix_before[0][5] = 1
+# Matrix_before[0][7] = 1
+#
+# Matrix_before[1][0] = 0
+# Matrix_before[1][2] = 1
+# Matrix_before[1][4] = 1
+# Matrix_before[1][6] = 1
+#
+# Matrix_before[2][1] = 1
+# Matrix_before[2][3] = 0
+# Matrix_before[2][5] = 1
+# Matrix_before[2][7] = 3
+#
+# Matrix_before[3][0] = 0
+# Matrix_before[3][2] = 0
+# Matrix_before[3][4] = 2
+# Matrix_before[3][6] = 2
+#
+# Matrix_before[4][1] = 2
+# Matrix_before[4][3] = 0
+# Matrix_before[4][5] = 0
+# Matrix_before[4][7] = 0
+#
+# Matrix_before[5][0] = 1
+# Matrix_before[5][2] = 0
+# Matrix_before[5][4] = 2
+# Matrix_before[5][6] = 2
+#
+# Matrix_before[6][1] = 0
+# Matrix_before[6][3] = 0
+# Matrix_before[6][5] = 2
+# Matrix_before[6][7] = 2
+#
+# Matrix_before[7][0] = 2
+# Matrix_before[7][2] = 2
+# Matrix_before[7][4] = 2
+# Matrix_before[7][6] = 0
+#
+#
+# ''' Matrix_before - plansza po wykonaniu ruchu (bez zdejmowania zbitych pionków)'''
+# Matrix_after = [[0 for x in range(rows)] for y in range(columns)]
+#
+# Matrix_after[0][1] = 1
+# Matrix_after[0][3] = 1
+# Matrix_after[0][5] = 1
+# Matrix_after[0][7] = 1
+#
+# Matrix_after[1][0] = 0
+# Matrix_after[1][2] = 1
+# Matrix_after[1][4] = 1
+# Matrix_after[1][6] = 1
+#
+# Matrix_after[2][1] = 1
+# Matrix_after[2][3] = 0
+# Matrix_after[2][5] = 1
+# Matrix_after[2][7] = 3
+#
+# Matrix_after[3][0] = 0
+# Matrix_after[3][2] = 0
+# Matrix_after[3][4] = 2
+# Matrix_after[3][6] = 2
+#
+# Matrix_after[4][1] = 2
+# Matrix_after[4][3] = 0
+# Matrix_after[4][5] = 0
+# Matrix_after[4][7] = 0
+#
+# Matrix_after[5][0] = 1
+# Matrix_after[5][2] = 0
+# Matrix_after[5][4] = 2
+# Matrix_after[5][6] = 2
+#
+# Matrix_after[6][1] = 0
+# Matrix_after[6][3] = 0
+# Matrix_after[6][5] = 2
+# Matrix_after[6][7] = 2
+#
+# Matrix_after[7][0] = 2
+# Matrix_after[7][2] = 2
+# Matrix_after[7][4] = 2
+# Matrix_after[7][6] = 0
+#
+# player_2 = False;
+# player_1 = True;
 
 #########################################################################################################
 
-def explode(matrix):
+def explore(matrix):
     '''Iteracja po tablicy'''
     for i, row in enumerate(matrix):
         for j, int in enumerate(row):
@@ -237,7 +237,7 @@ one_step=[]
 
 '''Funkcja wyszukująca możliwe do wykonania ruchy.
  Zwraca listę ruchów postaci: A1 G2 C5'''
-def return_correct_moves(player):
+def return_correct_moves(Matrix_before,player):
     if player == 1 or player == 2:
         moves.clear()
         moves_dam.clear()
@@ -245,9 +245,9 @@ def return_correct_moves(player):
         fld = field_from_matrix(Matrix_before)
         global hoop
         hoop = False
-        correct_move(player, fld) #sprawdzenie dostępnych ruchów dla zwykłych pionków
+        correct_move(Matrix_before,player, fld) #sprawdzenie dostępnych ruchów dla zwykłych pionków
         fld = field_from_matrix(Matrix_before)
-        correct_move_dam(player+2, fld) #sprawdzenie dostępnych ruchów dla damek
+        correct_move_dam(Matrix_before,player+2, fld) #sprawdzenie dostępnych ruchów dla damek
 
         moves_copy=copy.copy(moves)
         one_step_copy = copy.copy(one_step)
@@ -283,7 +283,7 @@ def return_correct_moves(player):
 
 '''Funkcja sprwadzająca dostępne ruchy zwykłego pionka dla gracza player na planszy fields.
  Zwraca listę ruchów dla zwykłego pionka'''
-def correct_move(player, fields, reccursion = False):
+def correct_move(Matrix_before,player, fields, reccursion = False):
     test = False
     fld = field_from_matrix(Matrix_before)
     dam = False
@@ -424,7 +424,7 @@ def correct_move(player, fields, reccursion = False):
 
 '''Funkcja sprwadzająca dostępne ruchy damek dla gracza player na planszy fields.
  Zwraca listę ruchów dla damek pionka'''
-def correct_move_dam(player, fields, reccursion = False):
+def correct_move_dam(Matrix_before,player, fields, reccursion = False):
     test = False
     fld = field_from_matrix(Matrix_before)
     global one_step
@@ -623,18 +623,18 @@ all_moves=[]
 
 '''Funkcja zapisująca na liście all_moves możliwe do wykonania ruchy 
  Zwraca ostateczną listę ruchów'''
-def moves_start(player_1):
+def moves_start(Matrix_before,player_1):
     if player_1:
         i=1
     else:
         i=2
-    moves = return_correct_moves(i)
-    without_dubplicate=[]
+    moves = return_correct_moves(Matrix_before,i)
+    without_duplicate=[]
     for d in moves:
-        if d not in without_dubplicate: #usunięcie duplikatów
-            without_dubplicate.append(d)
+        if d not in without_duplicate: #usunięcie duplikatów
+            without_duplicate.append(d)
     global all_moves
-    all_moves = copy.copy(without_dubplicate)
+    all_moves = copy.copy(without_duplicate)
 
 #########################################################################################################
 
@@ -654,7 +654,7 @@ def display():
     z planszą po wykonaniu ruchu (bez zdejmowanie zbitych pionków przeciwnika
     Sprawdza czy wykonany ruch znajduje się na liście all_moves'''
 def check_move(M1, Matrix_after, p1, p2):
-    moves_start(p1) #uzupełnienie listy all_moves
+    moves_start(M1,p1) #uzupełnienie listy all_moves
     display() #wyświetlenie listy możliwych ruchów
     correct=False
     i_after = 9
@@ -662,15 +662,17 @@ def check_move(M1, Matrix_after, p1, p2):
     if M1 == Matrix_after:
         return print("Move not found")  # nie wykryto zmiany w planszy po wykonaniu ruchu
     else:
-        for i, j, int in explode(M1):
+        for i, j, int in explore(M1):
             if M1[i][j] != Matrix_after[i][j]:
+                i_before=0
+                j_before=0
                 if int != 0:
                     i_before = i
                     j_before = j
                     if p1 and (M1[i_before][j_before] == 2 or M1[i_before][j_before] == 4):
-                        return print("Wykonano ruch pionkiem przeciwnika. Aktywny gracz to player_1")
+                        return (False,'Wykonano ruch pionkiem przeciwnika. Aktywny gracz to player_1')
                     if p2 and (M1[i_before][j_before] == 1 or M1[i_before][j_before] == 3):
-                        return print("Wykonano ruch pionkiem przeciwnika. Aktywny gracz to player_2")
+                        return (False,'Wykonano ruch pionkiem przeciwnika. Aktywny gracz to player_2')
                 else:
                     i_after = i
                     j_after = j
@@ -683,11 +685,13 @@ def check_move(M1, Matrix_after, p1, p2):
                 if move[0]==field_from[0] and move[1]== field_from[1] and move[len(move)-2]==field_to[0] and move[len(move)-1]==field_to[1]:
                     correct=True
         else:
-            print("Odstaw pionek")
+            print('Odstaw pionek')
         if correct:
-                print("RUCH POPRAWNY")
+            print('RUCH POPRAWNY')
+            return (True,'RUCH POPRAWNY')
         else:
-            print("RUCH NIEDOZWOLONY")
+            print('RUCH NIEDOZWOLONY')
+            return (False,'RUCH NIEDOZWOLONY')
 
 
 
@@ -695,4 +699,4 @@ def check_move(M1, Matrix_after, p1, p2):
 #player_2 = False;
 #player_1 = True;
 
-check_move(Matrix_before, Matrix_after, player_1, player_2)
+#check_move(Matrix_before, Matrix_after, player_1, player_2)

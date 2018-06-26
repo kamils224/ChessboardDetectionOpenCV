@@ -55,8 +55,8 @@ class BoardDetection:
         params.maxThreshold = 200;
 
         # Filter by Area.
-        params.filterByArea = False
-        params.minArea = 100
+        params.filterByArea = True
+        params.minArea = 400
 
         # Filter by Circularity
         params.filterByCircularity = True
@@ -286,22 +286,27 @@ class BoardDetection:
                 inverted_mask_red = cv2.bitwise_not(mask_red)
 
                 #PURPLE MASK
-                mask_purple = cv2.inRange(board_hsv, (110, 80, 80), (130, 255, 255))
-                mask_purple = cv2.erode(mask_purple, smallKernel, iterations=2)
+                mask_purple = cv2.inRange(board_hsv, (110, 0, 0), (160, 255, 255))
+                mask_purple = cv2.erode(mask_purple, smallKernel, iterations=4)
                 mask_purple = cv2.dilate(mask_purple, smallKernel, iterations=2)
                 inverted_mask_purple = cv2.bitwise_not(mask_purple)
+                inverted_mask_purple=cv2.erode(inverted_mask_purple,bigKernel,iterations=1)
+                cv2.imshow('purple', inverted_mask_purple)
 
                 #YELLOW MASK
                 mask_yellow = cv2.inRange(board_hsv, (20, 80, 80), (40, 255, 255))
                 mask_yellow = cv2.erode(mask_yellow, smallKernel, iterations=2)
-                mask_yellow = cv2.dilate(mask_yellow, smallKernel, iterations=2)
+                mask_yellow = cv2.dilate(mask_yellow, bigKernel, iterations=2)
+                mask_yellow = cv2.erode(mask_yellow, bigKernel, iterations=1)
                 inverted_mask_yellow = cv2.bitwise_not(mask_yellow)
+                #cv2.imshow('yellow',inverted_mask_yellow)
 
                 #Find blobs
                 blue_keypoints = detector.detect(inverted_mask_blue)
                 red_keypoints = detector.detect(inverted_mask_red)
                 purple_keypoints = detector.detect(inverted_mask_purple)
                 yellow_keypoints = detector.detect(inverted_mask_yellow)
+
 
 
                 #draw detected keypoints
@@ -318,6 +323,9 @@ class BoardDetection:
                                           cv2.DRAW_MATCHES_FLAGS_DRAW_RICH_KEYPOINTS)
 
                 cv2.imshow('Pawns', board)
+
+                for i in range(0,len(self.result_list)):
+                    self.result_list[i]=0
 
                 for point in blue_keypoints:
                     x = point.pt[0]
