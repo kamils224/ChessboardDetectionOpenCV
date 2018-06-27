@@ -45,7 +45,7 @@ class Application:
 
 
     def RunHistoryCheckers(self):
-        gra = LoadGame("SavedGames/trial_game.txt")  # wczytaj gre pokazowa
+        gra = LoadGame()  # wczytaj gre pokazowa
         HistoryCheckersWindow(gra)
 
     def destructor(self):

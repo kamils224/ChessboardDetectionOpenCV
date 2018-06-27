@@ -4,7 +4,7 @@ import tkinter
 from tkinter import filedialog
 
 class LoadGame(): #klasa wczytująca rozgrywke
-    def __init__(self,path):
+    def __init__(self):
         path = self.askAboutDirector()
         data = open(path, 'r').read() #wczytaj z pliku
         parsed_json = json.loads(data)  #sformatuj do json
