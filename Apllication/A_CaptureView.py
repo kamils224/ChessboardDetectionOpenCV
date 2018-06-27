@@ -229,7 +229,10 @@ class CaptureCheckersWindow:
         return True
 
     def SaveGame(self):
-        paramters = GetParametrToSaveFile(self.root, self.gameHistory)
-        self.root.wait_window(paramters.top)
+        if not self.gameHistory:
+            messagebox.showinfo("", "Historia rozgrywki jest pusta, gra nie zostanie zapisana")
+        else:
+            paramters = GetParametrToSaveFile(self.root, self.gameHistory)
+            self.root.wait_window(paramters.top)
 
 
