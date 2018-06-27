@@ -1,6 +1,6 @@
 from PIL import Image, ImageTk
 import tkinter as tk
-
+import tkinter.font as tkfont
 from Apllication.A_CaptureView import CaptureCheckersWindow
 from Backend.BoardDetection import *
 
@@ -10,34 +10,23 @@ class OptionsClass:
         self.CreateOptionWindow()
 
     def CreateOptionWindow(self):
+        self.helv36 = tkfont.Font(family='Helvetica', size=12, weight='bold')
         self.OptionsWindow = tk.Toplevel()  # inicjalizacja rooota
-        self.OptionsWindow.title("Options")  # tytul okna
-        self.OptionsWindow.protocol('WM_DELETE_WINDOW', self.destructor) # destrucor odpala się po zamknięciu okna
+        self.OptionsWindow.title("Camera IP")  # tytul okna
         self.CameraIP = tk.StringVar(self.OptionsWindow, value='http://192.168.0.100:4747/video%27')
         self.InitializePanels()
         self.center()
 
-    def InitializeRightPanel(self):
+    def InitializePanels(self):
         self.RightPanel = tk.Label(self.OptionsWindow)
         self.RightPanel.grid(row=0, column=1)
-        self.InitializeRightPanelComponent()
-
-    def InitializeRightPanelComponent(self):
-        tk.Entry(self.RightPanel, width=50, textvariable=self.CameraIP).grid(row=0, column=2) #ip entry
-        self.InitializePlayButton()
-
-    def InitializePlayButton(self):
-        button1 = tk.Button(self.RightPanel, text='Przejdź do GRY', command=self.GoToCaptureCheckers)
-        button1.grid(row=5, column=2)
-
-    def InitializePanels(self):
-        self.InitializeRightPanel()
+        tk.Entry(self.RightPanel, width=50 , textvariable=self.CameraIP, font=self.helv36)\
+            .grid(row=1, column=2, pady=10, padx=10)  # ip entry
+        button1 = tk.Button(self.RightPanel, text='Przejdź do gry', command=self.GoToCaptureCheckers, font=self.helv36)
+        button1.grid(row=5, column=2, pady=5)
 
     def GoToCaptureCheckers(self):
         CaptureCheckersWindow(ip=self.CameraIP.get())
-        self.OptionsWindow.destroy()
-
-    def destructor(self):
         self.OptionsWindow.destroy()
 
     def center(self):

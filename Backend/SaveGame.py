@@ -7,7 +7,7 @@ import datetime
 
 class SaveGame():
     def __init__(self,game_history,gamename='nazwa gry',p1name = 'Andrei',p2name = 'Alex'):
-       
+
         if not game_history:
             messagebox.showinfo("", "Historia rozgrywki jest pusta, gra nie zostanie zapisana")
         else:
