@@ -4,11 +4,11 @@ import tkinter.font as tkfont
 from tkinter import messagebox
 from Backend.CheckersVisualization import Checkers_Board
 from Backend.BoardDetection import BoardDetection
-from Backend.SaveGame import SaveGame
 from Backend.LoadGame import *
 import cv2
 import threading
 from Backend.correct_moves import check_move
+from Backend.GetParametrToSaveFile import GetParametrToSaveFile
 
 from tkinter import *
 
@@ -229,5 +229,7 @@ class CaptureCheckersWindow:
         return True
 
     def SaveGame(self):
-        SaveGame(self.gameHistory)
+        paramters = GetParametrToSaveFile(self.root, self.gameHistory)
+        self.root.wait_window(paramters.top)
+
 
