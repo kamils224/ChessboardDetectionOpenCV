@@ -11,11 +11,8 @@ from Backend.correct_moves import check_move
 
 from tkinter import *
 
+
 class ToolTip(object):
-
-    player1=True
-    player2=False
-
     def __init__(self, widget):
         self.widget = widget
         self.tipwindow = None
@@ -29,7 +26,7 @@ class ToolTip(object):
             return
         x, y, cx, cy = self.widget.bbox("insert")
         x = x + self.widget.winfo_rootx() + 27
-        y = y + cy + self.widget.winfo_rooty() +27
+        y = y + cy + self.widget.winfo_rooty() + 27
         self.tipwindow = tw = Toplevel(self.widget)
         tw.wm_overrideredirect(1)
         tw.wm_geometry("+%d+%d" % (x, y))
@@ -51,18 +48,30 @@ class ToolTip(object):
         if tw:
             tw.destroy()
 
+
 def createToolTip(widget, text):
     toolTip = ToolTip(widget)
+
     def enter(event):
         toolTip.showtip(text)
+
     def leave(event):
         toolTip.hidetip()
+
     widget.bind('<Enter>', enter)
     widget.bind('<Leave>', leave)
 
 
 class CaptureCheckersWindow:
+    StartingMatrix = [[1, 0, 1, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0, 1], [1, 0, 1, 0, 1, 0, 1, 0],
+                      [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 2, 0, 2, 0, 2, 0, 2],
+                      [2, 0, 2, 0, 2, 0, 2, 0], [0, 2, 0, 2, 0, 2, 0, 2]]
     MatrixBefore = [[0 for x in range(8)] for y in range(8)]
+
+    player1 = False
+    player2 = True
+    round = 1
+    gameHistory=[]
 
     def __init__(self, ip=0):
         self.detection = BoardDetection()
@@ -101,6 +110,10 @@ class CaptureCheckersWindow:
                                font=helv36)
         MoveButton.pack(side="right", fill="both", expand=1)
 
+        SaveButton = tk.Button(self.panel2, text="Zapisz grę", command=self.SaveGame(),
+                               font=helv36)
+        SaveButton.pack(side="right", fill="both", expand=1)
+
         NewGameButton = tk.Button(self.panel2, text="Nowa gra", command=self.StartGame,
                                   font=helv36)
         NewGameButton.pack(side="left", fill="both", expand=1)
@@ -109,17 +122,18 @@ class CaptureCheckersWindow:
                                      font=helv36)
         ResetPawnsButton.pack(side="left", fill="both", expand=1)
 
-        createToolTip(MoveButton,"Pobiera aktualną pozycję pionków i sprawdza poprawność ruchu")
-        createToolTip(NewGameButton,"Pobiera pozycję pionków i sprawdza czy ustawienie jest zgodne z początkiem gry")
-        createToolTip(ResetPawnsButton,"Aktualizacja pozycji pionków bez sprawdzenia poprawności ruchu, używać tylko w przypadku błędów")
+        createToolTip(MoveButton, "Pobiera aktualną pozycję pionków i sprawdza poprawność ruchu")
+        createToolTip(NewGameButton, "Pobiera pozycję pionków i sprawdza czy ustawienie jest zgodne z początkiem gry")
+        createToolTip(ResetPawnsButton,
+                      "Aktualizacja pozycji pionków bez sprawdzenia poprawności ruchu, używać tylko w przypadku błędów")
 
         self.InfoLabel = tk.Label(self.panel2, text="Rozpocznij nową grę")
         self.InfoLabel.pack(side="bottom", fill="both", expand=1)
         self.InfoLabel.config(width=25, font=("Courier", 30))
 
-        self.CurrentPlayerLaber = tk.Label(self.panel2, text="Brak pionków")
-        self.CurrentPlayerLaber.pack(side="bottom", fill="both", expand=1)
-        self.CurrentPlayerLaber.config(width=25, font=("Courier", 30))
+        self.CurrentPlayerLabel = tk.Label(self.panel2, text="Brak pionków")
+        self.CurrentPlayerLabel.pack(side="bottom", fill="both", expand=1)
+        self.CurrentPlayerLabel.config(width=25, font=("Courier", 30))
 
     def Catch(self):
 
@@ -134,25 +148,33 @@ class CaptureCheckersWindow:
 
         print(self.MatrixBefore)
         print(MatrixDraw)
-
         # sprawdzenie poprawności ruchu
-        correct=check_move(self.MatrixBefore, MatrixDraw, False, True)
+        correct = check_move(self.MatrixBefore, MatrixDraw, self.player1, self.player2)
 
         # jeżeli ruch był poprawny zaktualizuj macierz
         if correct is None:
             pass
         elif correct[0]:
+            # dodanie ruchu do historii rozgrywki
+            self.gameHistory.append(MatrixDraw)
             # rysowanie planszy
             self.board_game.draw(MatrixDraw, 0)
             self.MatrixBefore = MatrixDraw
+            self.player1 = not self.player1
+            self.player2 = not self.player2
+            self.ChangePlayerLabel()
+            self.round += 1
+            self.InfoLabel.config(text='Tura' + str(self.round))
+
         else:
-            messagebox.showinfo('Błąd',correct[1]+'\nCofnij pionek na właściwe miejsce')
+            messagebox.showinfo('Błąd', correct[1] + '\nCofnij pionek na właściwe miejsce')
 
     def StartGame(self):
 
         result = messagebox.askokcancel('Nowa gra', 'Czy na pewno chcesz rozpocząć nową grę?')
 
         if result is True:
+            self.gameHistory.clear()
             board = self.detection.result_list
             MatrixDraw = [[0 for x in range(8)] for y in range(8)]
             i = 0
@@ -161,7 +183,14 @@ class CaptureCheckersWindow:
                     MatrixDraw[x][y] = board[i]
                     i += 1
 
-            self.board_game.draw(MatrixDraw, 0)
+            if (self.CompareBoards(MatrixDraw,self.StartingMatrix)):
+                self.board_game.draw(MatrixDraw, 0)
+                self.ChangePlayerLabel()
+                self.InfoLabel.config(text='Tura' + str(self.round))
+                self.MatrixBefore=MatrixDraw
+            else:
+                messagebox.showinfo('Błąd','Niepoprawne ustawienie pionków')
+
         else:
             pass
 
@@ -173,8 +202,14 @@ class CaptureCheckersWindow:
             for y in range(0, 8):
                 MatrixDraw[x][y] = board[i]
                 i += 1
-        self.MatrixBefore=MatrixDraw
+        self.MatrixBefore = MatrixDraw
         self.board_game.draw(MatrixDraw, 0)
+
+    def ChangePlayerLabel(self):
+        if self.player1:
+            self.CurrentPlayerLabel.config(text='Tura gracza niebieskiego')
+        else:
+            self.CurrentPlayerLabel.config(text='Tura gracza czerwonego')
 
     def video_loop(self):
         t = threading.Thread(target=self.detection.StartDetection)
@@ -182,3 +217,15 @@ class CaptureCheckersWindow:
 
     def destructor(self):
         self.root.destroy()
+
+    def CompareBoards(self, M1, M2):
+        for x in range(0, 8):
+            for y in range(0, 8):
+                if M1[x][y] == M2[x][y]:
+                    continue
+                else:
+                    return False
+        return True
+
+    def SaveGame(self):
+        pass

@@ -241,7 +241,6 @@ class BoardDetection:
             cv2.imshow('Camera',frame)
 
             markers_position = []
-
             if len(keypoints) == 4:
                 for i in keypoints:
                     # uncomment to check marker position
@@ -291,7 +290,7 @@ class BoardDetection:
                 mask_purple = cv2.dilate(mask_purple, smallKernel, iterations=2)
                 inverted_mask_purple = cv2.bitwise_not(mask_purple)
                 inverted_mask_purple=cv2.erode(inverted_mask_purple,bigKernel,iterations=1)
-                cv2.imshow('purple', inverted_mask_purple)
+                #cv2.imshow('purple', inverted_mask_purple)
 
                 #YELLOW MASK
                 mask_yellow = cv2.inRange(board_hsv, (20, 80, 80), (40, 255, 255))
