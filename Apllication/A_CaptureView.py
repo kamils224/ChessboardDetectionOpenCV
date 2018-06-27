@@ -4,7 +4,7 @@ import tkinter.font as tkfont
 from tkinter import messagebox
 from Backend.CheckersVisualization import Checkers_Board
 from Backend.BoardDetection import BoardDetection
-from Backend.LoadedGameManager import *
+from Backend.LoadGame import *
 import cv2
 import threading
 from Backend.correct_moves import check_move
@@ -110,7 +110,7 @@ class CaptureCheckersWindow:
                                font=helv36)
         MoveButton.pack(side="right", fill="both", expand=1)
 
-        SaveButton = tk.Button(self.panel2, text="Zapisz grę", command=self.SaveGame(),
+        SaveButton = tk.Button(self.panel2, text="Zapisz grę", command=self.SaveGame,
                                font=helv36)
         SaveButton.pack(side="right", fill="both", expand=1)
 
@@ -228,4 +228,4 @@ class CaptureCheckersWindow:
         return True
 
     def SaveGame(self):
-        pass
+        print(self.gameHistory)

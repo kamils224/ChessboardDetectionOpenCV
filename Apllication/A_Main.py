@@ -4,7 +4,7 @@ import tkinter.font as tkfont
 import cv2
 
 from Apllication.A_HistoryView import HistoryCheckersWindow
-from Backend.LoadedGameManager import LoadedGameManager
+from Backend.LoadGame import LoadGame
 from Apllication.A_OptionsView import OptionsClass
 
 class Application:
@@ -45,7 +45,7 @@ class Application:
 
 
     def RunHistoryCheckers(self):
-        gra = LoadedGameManager("SavedGames/trial_game.txt")  # wczytaj gre pokazowa
+        gra = LoadGame("SavedGames/trial_game.txt")  # wczytaj gre pokazowa
         HistoryCheckersWindow(gra)
 
     def destructor(self):

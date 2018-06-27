@@ -1,6 +1,6 @@
 import json
 
-class LoadedGameManager(): #klasa wczytująca rozgrywke
+class SaveGame(): #klasa wczytująca rozgrywke
     def __init__(self,path):
         data = open(path, 'r').read() #wczytaj z pliku
         parsed_json = json.loads(data)  #sformatuj do json
