@@ -285,7 +285,7 @@ class BoardDetection:
                 inverted_mask_red = cv2.bitwise_not(mask_red)
 
                 #PURPLE MASK
-                mask_purple = cv2.inRange(board_hsv, (110, 0, 0), (160, 255, 255))
+                mask_purple = cv2.inRange(board_hsv, (110, 80, 80), (160, 255, 255))
                 mask_purple = cv2.erode(mask_purple, smallKernel, iterations=4)
                 mask_purple = cv2.dilate(mask_purple, smallKernel, iterations=2)
                 inverted_mask_purple = cv2.bitwise_not(mask_purple)

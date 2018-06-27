@@ -64,9 +64,12 @@ def createToolTip(widget, text):
 
 
 class CaptureCheckersWindow:
-    StartingMatrix = [[1, 0, 1, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0, 1], [1, 0, 1, 0, 1, 0, 1, 0],
-                      [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 2, 0, 2, 0, 2, 0, 2],
-                      [2, 0, 2, 0, 2, 0, 2, 0], [0, 2, 0, 2, 0, 2, 0, 2]]
+    StartingMatrix = [[0, 1, 0, 1, 0, 1, 0, 1], [1, 0, 1, 0, 1, 0, 1, 0], [0, 1, 0, 1, 0, 1, 0, 1],
+                      [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [2, 0, 2, 0, 2, 0, 2, 0],
+                      [0, 2, 0, 2, 0, 2, 0, 2], [2, 0, 2, 0, 2, 0, 2, 0]]
+    StartingMatrix2 = [[0, 2, 0, 2, 0, 2, 0, 2], [2, 0, 2, 0, 2, 0, 2, 0], [0, 2, 0, 2, 0, 2, 0, 2],
+                      [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 1, 0, 1, 0, 1, 0],
+                      [0, 1, 0, 1, 0, 1, 0, 1], [1, 0, 1, 0, 1, 0, 1, 0]]
     MatrixBefore = [[0 for x in range(8)] for y in range(8)]
 
     player1 = False
@@ -189,6 +192,13 @@ class CaptureCheckersWindow:
                 self.ChangePlayerLabel()
                 self.InfoLabel.config(text='Tura' + str(self.round))
                 self.MatrixBefore=MatrixDraw
+            elif(self.CompareBoards(MatrixDraw,self.StartingMatrix2)):
+                self.player1=not self.player1
+                self.player2=not self.player2
+                self.board_game.draw(MatrixDraw, 0)
+                self.ChangePlayerLabel()
+                self.InfoLabel.config(text='Tura' + str(self.round))
+                self.MatrixBefore=MatrixDraw
             else:
                 messagebox.showinfo('Błąd','Niepoprawne ustawienie pionków')
 
@@ -204,6 +214,7 @@ class CaptureCheckersWindow:
                 MatrixDraw[x][y] = board[i]
                 i += 1
         self.MatrixBefore = MatrixDraw
+        print(MatrixDraw)
         self.board_game.draw(MatrixDraw, 0)
 
     def ChangePlayerLabel(self):
