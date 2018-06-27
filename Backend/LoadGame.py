@@ -1,7 +1,11 @@
 import json
+import os
+import tkinter
+from tkinter import filedialog
 
 class LoadGame(): #klasa wczytująca rozgrywke
     def __init__(self,path):
+        path = self.askAboutDirector()
         data = open(path, 'r').read() #wczytaj z pliku
         parsed_json = json.loads(data)  #sformatuj do json
         self.game_name = parsed_json["game_name"]   # do zmiennej game_name zapisz nazwa
@@ -15,3 +19,12 @@ class LoadGame(): #klasa wczytująca rozgrywke
             print("W historii nie ma takiej rundy")
         else:
             return self.game_history[round_number]["pawns"]#z historii bierze odpowiednią runde i zwraca macierz planszy
+
+    def askAboutDirector(self):
+        root = tkinter.Tk()
+        root.withdraw()  # use to hide tkinter window
+
+        currdir = os.getcwd()
+        outFileName = filedialog.askopenfilename(parent=root, initialdir=currdir, title='Select file',
+                                               filetypes=[('txt files', '.txt')], defaultextension='.txt')
+        return outFileName

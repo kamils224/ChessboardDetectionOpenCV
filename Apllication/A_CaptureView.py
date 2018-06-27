@@ -4,6 +4,7 @@ import tkinter.font as tkfont
 from tkinter import messagebox
 from Backend.CheckersVisualization import Checkers_Board
 from Backend.BoardDetection import BoardDetection
+from Backend.SaveGame import SaveGame
 from Backend.LoadGame import *
 import cv2
 import threading
@@ -228,4 +229,5 @@ class CaptureCheckersWindow:
         return True
 
     def SaveGame(self):
-        print(self.gameHistory)
+        SaveGame(self.gameHistory)
+
