@@ -8,7 +8,7 @@ from Backend.LoadGame import *
 import cv2
 import threading
 from Backend.correct_moves import check_move
-from Backend.GetParametrToSaveFile import GetParametrToSaveFile
+from Backend.GetParameterToSaveFile import GetParameterToSaveFile
 
 from tkinter import *
 
@@ -243,7 +243,7 @@ class CaptureCheckersWindow:
         if not self.gameHistory:
             messagebox.showinfo("", "Historia rozgrywki jest pusta, gra nie zostanie zapisana")
         else:
-            paramters = GetParametrToSaveFile(self.root, self.gameHistory)
+            paramters = GetParameterToSaveFile(self.root, self.gameHistory)
             self.root.wait_window(paramters.top)
 
 

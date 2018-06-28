@@ -11,7 +11,7 @@ class SaveGame():
         if not game_history:
             messagebox.showinfo("", "Historia rozgrywki jest pusta, gra nie zostanie zapisana")
         else:
-            dictionary = self.askAboutDirector()
+            dictionary = self.askAboutDirectory()
 
             now = datetime.datetime.now()
             jsonhistory = []
@@ -26,7 +26,7 @@ class SaveGame():
                            'player2_name': p2name,
                            'game_history': jsonhistory}, outfile)
 
-    def askAboutDirector(self):
+    def askAboutDirectory(self):
         root = tkinter.Tk()
         root.withdraw()  # use to hide tkinter window
 

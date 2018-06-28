@@ -365,7 +365,7 @@ def correct_move(Matrix_before, player, fields, reccursion=False):
                             double_index = Find_index(fields, double)
                             fields_rec[double_index] = Field(double.coordinates, Pawn(player, dam))
                             hoops()
-                            correct_move(player, fields_rec, True)
+                            correct_move(Matrix_before,player,fields_rec, True)
 
             ##NW direction
             nw = x.directions(NW, x.coordinates)
@@ -395,7 +395,7 @@ def correct_move(Matrix_before, player, fields, reccursion=False):
                             double_index = Find_index(fields, double)
                             fields_rec[double_index] = Field(double.coordinates, Pawn(player, dam))
                             hoops()
-                            correct_move(player, fields_rec, True)
+                            correct_move(Matrix_before,player,fields_rec, reccursion=True)
 
             ##SE direction
             se = x.directions(SE, x.coordinates)
@@ -425,7 +425,7 @@ def correct_move(Matrix_before, player, fields, reccursion=False):
                             double_index = Find_index(fields, double)
                             fields_rec[double_index] = Field(double.coordinates, Pawn(player, dam))
                             hoops()
-                            correct_move(player, fields_rec, True)
+                            correct_move(Matrix_before,player, fields_rec, True)
 
             ##SW direction
             sw = x.directions(SW, x.coordinates)
@@ -455,7 +455,7 @@ def correct_move(Matrix_before, player, fields, reccursion=False):
                             double_index = Find_index(fields, double)
                             fields_rec[double_index] = Field(double.coordinates, Pawn(player, dam))
                             hoops()
-                            correct_move(player, fields_rec, True)
+                            correct_move(Matrix_before,player, fields_rec, True)
 
 
 #########################################################################################################
