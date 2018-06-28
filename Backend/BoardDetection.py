@@ -20,15 +20,6 @@ class BoardDetection:
     blockWidth = ((width - horizontalOffset) / 8)
     blockHeight = ((height - verticalOffset) / 8)
 
-    green_offset=0
-    blue_offset=0
-    red_offset=0
-    purple_offset=0
-    yellow_offset=0
-
-
-    print(blockWidth)
-    print(blockHeight)
 
     board_blocks = []
 

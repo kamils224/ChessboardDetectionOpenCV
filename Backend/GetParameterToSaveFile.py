@@ -2,7 +2,7 @@ import tkinter as tk
 import tkinter.font as tkfont
 from Backend.SaveGame import SaveGame
 
-class GetParametrToSaveFile:
+class GetParameterToSaveFile:
     def __init__(self, parent,gamehistory):
         self.gameHistory = gamehistory
         self.helv36 = tkfont.Font(family='Helvetica', size=12, weight='bold')
